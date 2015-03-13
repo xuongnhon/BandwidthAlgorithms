@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TopologyFilePath>Map\mira_map.dat</TopologyFilePath>
+  <IEListFilePath>Map\mira_ie_list.dat</IEListFilePath>
+  <RequestFilePath>Request\Mira\2_static_MIRA_P20-20-20-40_bw10-20-30-40_2000.txt</RequestFilePath>
+  <TimerInterval>5</TimerInterval>
+  <LogFilePath>D:\log</LogFilePath>
+  <LogFileName>MHA.log</LogFileName>
+  <LogActivated>false</LogActivated>
+  <StatisticsActivated>false</StatisticsActivated>
+  <StatisticsFilepath>Result\Mira\2_static_MIRA_P20-20-20-40_bw10-20-30-40_2000.txt</StatisticsFilepath>
+  <ResultPrefix>Result</ResultPrefix>
+  <ComputingPrefix>Computing</ComputingPrefix>
+  <AcceptedBandwidthRatioPrefix>AcceptedBandwidthRatio</AcceptedBandwidthRatioPrefix>
+  <NumberOfSplit>100</NumberOfSplit>
+  <UnicastRoutingAlgorithms>
+    <RoutingAlgorithm Name="MCSRA" Selected="false" />
+    <RoutingAlgorithm Name="BGHT1" Selected="false" />
+    <RoutingAlgorithm Name="BGHT2" Selected="false" />
+    <RoutingAlgorithm Name="PBMTA" Selected="false" />
+    <RoutingAlgorithm Name="BGLC" Selected="false" />
+    <RoutingAlgorithm Name="TEARD" Selected="true" />
+    <RoutingAlgorithm Name="MHA" Selected="false" />
+    <RoutingAlgorithm Name="RBA" Selected="false" />
+    <RoutingAlgorithm Name="WSP" Selected="false" />
+    <RoutingAlgorithm Name="BCRA" Selected="false" />
+    <RoutingAlgorithm Name="MIRA" Selected="false">
+      <Params>
+        <Param Name="Alpha" Value="1" />
+      </Params>
+    </RoutingAlgorithm>
+    <RoutingAlgorithm Name="DORA" Selected="false">
+      <Params>
+        <Param Name="BWP" Value="0.9" />
+      </Params>
+    </RoutingAlgorithm>
+    <RoutingAlgorithm Name="RRATE" Selected="false">
+      <Params>
+        <Param Name="K" Value="30" />
+        <Param Name="N" Value="15" />
+        <Param Name="K1" Value="0.5" />
+        <Param Name="K2" Value="0.5" />
+      </Params>
+    </RoutingAlgorithm>
+    <RoutingAlgorithm Name="POOA" Selected="false">
+      <Params>
+        <Param Name="K" Value="20" />
+      </Params>
+    </RoutingAlgorithm>
+  </UnicastRoutingAlgorithms>
+  <MulticastRoutingAlgorithms>
+    <RoutingAlgorithm Name="SPT" Selected="false" />
+    <RoutingAlgorithm Name="SPTR" Selected="false" />
+    <RoutingAlgorithm Name="LMMIRA" Selected="true" />
+  </MulticastRoutingAlgorithms>
+</Configuration>

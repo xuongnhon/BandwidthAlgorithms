@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<AutomationConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- For automatic cutter test, -->
+  <Simulator workingDir = "..\..\..\NetworkSimulator\bin\Debug\"
+             executorName = "NetworkSimulator.exe"
+             configFile = "config.xml" 
+             showUI = "false"/>
+
+  <!--List of algorithms to run (Must exists in network simulator main config file)-->
+  <Algorithms>
+    <Algorithm name="MHA"/>
+    <Algorithm name="WSP"/>
+    <Algorithm name="BCRA"/>
+    <Algorithm name="MIRA"/>
+    <Algorithm name="DORA"/>
+    <Algorithm name="RRATE"/>
+    <Algorithm name="POOA"/>
+    <Algorithm name="BGLC"/>
+    <!--========================================-->
+    <Algorithm name="BGHT1"/>
+    <Algorithm name="TEARD"/>
+    <!--Not use-->
+    <!--<Algorithm name="RBA"/>
+    <Algorithm name="BGHT2"/>
+    <Algorithm name="PBMTA"/>
+    <Algorithm name="MCSRA"/>-->
+  </Algorithms>
+
+  <Topologies>
+    <Topology name = "MIRA" 
+              filepath = "Map\mira_map.dat"
+              IEfilepath = "Map\mira_ie_list.dat"
+              requestDir = "Request\Mira\"
+              resultDir = "Result\Mira\">
+        <Requests>
+          
+        </Requests>
+    </Topology>
+
+    <!--<Topology name = "ANSNET"
+              filepath = "Map\ansnet_map.dat"
+              IEfilepath = "Map\ansnet_ie.dat"
+              requestDir = "Request\Ansnet\"
+              resultDir = "Result\Ansnet\">
+      <Requests>
+        
+      </Requests>
+    </Topology>
+
+    <Topology name = "CESNET"
+              filepath = "Map\cesnet_map.dat"
+              IEfilepath = "Map\cesnet_ie_list.dat"
+              requestDir = "Request\Cesnet\"
+              resultDir = "Result\CESNET\">
+      <Requests>
+        
+      </Requests>
+    </Topology>
+    
+    <Topology name = "NET1"
+              filepath = "Map\NET-50Node.dat"
+              IEfilepath = "Map\net1_ie.dat"
+              requestDir = "Request\NET1\"
+              resultDir = "Result\NET1\">
+      <Requests>
+       
+      </Requests>
+    </Topology>-->
+  </Topologies>
+  
+  <!-- List of request file -->
+</AutomationConfig>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D04C4C51-4030-4116-A6CC-56FF80E86BF5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NetworkSimulator</RootNamespace>
+    <AssemblyName>NetworkSimulator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Troschuetz.Random">
+      <HintPath>Reference\Troschuetz.Random.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NetworkComponents\Tree.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\AllSimplePaths.cs" />
+    <Compile Include="RoutingComponents\MulticastRoutingStrategies\Lmmira.cs" />
+    <Compile Include="RoutingComponents\MulticastRoutingStrategies\LmmiraCore.cs" />
+    <Compile Include="RoutingComponents\MulticastRoutingStrategies\MulticastRoutingStrategy.cs" />
+    <Compile Include="RoutingComponents\MulticastRoutingStrategies\SPT.cs" />
+    <Compile Include="RoutingComponents\MulticastRoutingStrategies\SPTR.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\BGLC.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\BLLRA.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\TEARD.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\BGHT2.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\PBMTA.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\BGHT1.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\RBA.cs" />
+    <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastRequestDispatcher.cs" />
+    <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastResponeManager.cs" />
+    <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastResponse.cs" />
+    <Compile Include="SimulatorComponents\Configuration.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\BreadthFirstSearch.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\Dijkstra.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\DisjointPaths.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\FordFulkerson.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\ShortestPaths.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\YenAlgorithm.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\BCRA.cs" />
+    <Compile Include="RoutingComponents\CommonObjects\IEPair.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\DORA.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\MHA.cs" />
+    <Compile Include="NetworkComponents\Link.cs" />
+    <Compile Include="NetworkComponents\Node.cs" />
+    <Compile Include="NetworkComponents\Topology.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\MIRA.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\POOA.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\RoutingStrategy.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\RRATE.cs" />
+    <Compile Include="RoutingComponents\RoutingStrategies\WSP.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimulatorComponents\ITickerListener.cs" />
+    <Compile Include="SimulatorComponents\MicroLibrary.cs" />
+    <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastRouter.cs" />
+    <Compile Include="SimulatorComponents\Request.cs" />
+    <Compile Include="SimulatorComponents\RequestDispatcher.cs" />
+    <Compile Include="SimulatorComponents\ResponeManager.cs" />
+    <Compile Include="SimulatorComponents\Response.cs" />
+    <Compile Include="SimulatorComponents\Router.cs" />
+    <Compile Include="SimulatorComponents\SimulatorManager.cs" />
+    <Compile Include="SimulatorComponents\Ticker.cs" />
+    <Compile Include="StatisticsComponents\Log.cs" />
+    <Compile Include="StatisticsComponents\Statistics.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Map\ansnet_ie.dat" />
+    <None Include="bin\Debug\Map\ansnet_map.dat" />
+    <None Include="bin\Debug\Map\cesnet_ie_list.dat" />
+    <None Include="bin\Debug\Map\cesnet_map.dat" />
+    <None Include="bin\Debug\Map\lmmira_map.dat" />
+    <None Include="bin\Debug\Map\mira_ie_list.dat" />
+    <None Include="bin\Debug\Map\mira_map.dat" />
+    <None Include="bin\Debug\Map\spt_map.dat" />
+    <None Include="bin\Debug\ReportAccepted.xlsx" />
+    <None Include="bin\Debug\ReportComputingTime.xlsx" />
+    <None Include="Documents\Analysis and Design.pptx" />
+    <None Include="Documents\BCRA-MIRA.docx" />
+    <None Include="Documents\DORA.docx" />
+    <None Include="Documents\POOA.docx" />
+    <None Include="Documents\RRATE.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Request\Cesnet\10_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_3000_40_20.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\11_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_3000_80_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\12_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\13_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\14_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\15_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\16_static_CESNET_P5-10-15-20_bw80-120-160-200_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\17_static_CESNET_P5-10-15-20_bw80-120-160-200_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\19_static_CESNET_P5-10-15-20_bw60-80-120-160_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\1_static_CESNET_P5-10-15-20_bw40-60-80-100_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\20_static_CESNET_P12-13_bw40-60-120-160_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\21_static_CESNET_P5-10-15-20_bw40-60-120-160_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\22_static_CESNET_P5-10-40_bw40-60-120-200_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\2_static_CESNET_P5-10-15-20_bw40-80-120-160_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\3_static_CESNET_P5-10-15-20_bw80-120-160-200_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\4_static_CESNET_P12-13_bw80-120-160-200_1000.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\5_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_40_10.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\6_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_40_20.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\7_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_40_30.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\8_dynamic_CESNET_P5-10-15-20_bw100-130-160-200_400_2000_40_20.txt" />
+    <Content Include="bin\Debug\Request\Cesnet\9_dynamic_CESNET_P5-10-15-20_bw100-130-160-200_400_2000_40_20.txt" />
+    <Content Include="bin\Debug\Request\Mira\10_dynamic_MIRA_P10-20-30-40_bw30-35-45-50-20_400_2000_40_30.txt" />
+    <Content Include="bin\Debug\Request\Mira\11_dynamic_MIRA_P10-10-40-40_bw13-19-23_400_2000_40_10.txt" />
+    <Content Include="bin\Debug\Request\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt" />
+    <Content Include="bin\Debug\Request\Mira\13_dynamic_MIRA_P10-20-30-40_bw13-17-23-29_400_2000_40_10.txt" />
+    <Content Include="bin\Debug\Request\Mira\14_dynamic_MIRA_P10-20-30-40_bw13-17-23-29_400_2000_40_20.txt" />
+    <Content Include="bin\Debug\Request\Mira\15_dynamic_MIRA_P10-20-30-40_bw13-17-23-29_400_2000_40_30.txt" />
+    <Content Include="bin\Debug\Request\Mira\16_static_MIRA_P10-20-30-40_bw5-7-13-17_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\17_static_MIRA_P10-20-30-40_bw5-11-17_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\18_static_MIRA_P10-20-30-40_bw5-11-17-23_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\19_static_MIRA_P15-25-30-35_bw5-11-17-23_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\1_static_MIRA_P10-20-30-40_bw10-20-30-40_2000.txt" />
+    <Content Include="bin\Debug\Request\Mira\20_static_MIRA_P10-20-30-40_bw13-17-23-29_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\21_static_MIRA_P10-20-30-40_bw5-10-20-30_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\2_static_MIRA_P20-20-20-40_bw10-20-30-40_2000.txt" />
+    <Content Include="bin\Debug\Request\Mira\3_static_MIRA_P20-20-20-40_bw5-10-15-20_2000.txt" />
+    <Content Include="bin\Debug\Request\Mira\4_static_MIRA_P10-20-30-40_bw5-10-15-20_2000.txt" />
+    <Content Include="bin\Debug\Request\Mira\5_static_MIRA_P10-20-30-40_bw5-10-15-20_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\6_dynamic_MIRA_P10-20-30-40_bw5-10-15-20_400_2000_40_10.txt" />
+    <Content Include="bin\Debug\Request\Mira\7_dynamic_MIRA_P10-20-30-40_bw30-35-45-50-20_400_2000_40_10.txt" />
+    <Content Include="bin\Debug\Request\Mira\8_static_MIRA_P10-20-30-40_bw5-7-9-10_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\9_static_MIRA_P10-20-30-40_bw13-19-23_1000.txt" />
+    <Content Include="bin\Debug\Request\Mira\dynamic_MIRA_P5-5-40-50_bw30-35-45-50_400_2000_40_10.txt" />
+    <Content Include="Documents\CESNET_MAP.PNG" />
+    <Content Include="Documents\MIRA_MAP.PNG" />
+    <Content Include="Reference\Troschuetz.Random.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\Request\lmmira\" />
+    <Folder Include="bin\Debug\Request\Spt\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
