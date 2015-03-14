@@ -20,7 +20,9 @@ namespace NetworkSimulator.NetworkComponents
 
         private Node _Source;
 
-        private Node _Destination;        
+        private Node _Destination;
+
+        private Dictionary<NetworkSimulator.SimulatorComponents.Response, double> _PercentOfBandwidthUsed;
 
         #endregion
 
@@ -57,6 +59,11 @@ namespace NetworkSimulator.NetworkComponents
         {
             get { return _Destination; }
         }
+
+        public Dictionary<NetworkSimulator.SimulatorComponents.Response, double> PercentOfBandwidthUsed
+        {
+            get { return _PercentOfBandwidthUsed; }
+        }
         #endregion
 
         public Link(Node source, Node destination, double capacity)
@@ -64,13 +71,19 @@ namespace NetworkSimulator.NetworkComponents
             _Key = source.Key + "|" + destination.Key;
             this._Source = source;
             this._Destination = destination;
-            this._Capacity = capacity;            
-        }        
+            this._Capacity = capacity;
+            _PercentOfBandwidthUsed = new Dictionary<Response, double>();
+        }
 
         public override string ToString()
         {
             string[] v = _Key.Split('|');
             return "LNK-(" + v[0] + "-" + v[1] + ") CAP=" + _Capacity + " RSD=" + this.ResidualBandwidth;
+        }
+
+        public void AddPercentOfBandwidthUsed(NetworkSimulator.SimulatorComponents.Response _Response, double _Value)
+        {
+            this._PercentOfBandwidthUsed.Add(_Response, _Value);
         }
     }
 }

@@ -231,5 +231,34 @@ namespace NetworkSimulator.NetworkComponents
             }
             return s;
         }
+
+        public void CalculatePercentOfBandwidthUsedPerLink(NetworkSimulator.SimulatorComponents.Response _Response)
+        {
+            if (_Response.HasPath())
+            {
+                foreach (var _Link in this.Links)
+                {
+                    if (_Response.Path.Contains(_Link))
+                        _Link.AddPercentOfBandwidthUsed(_Response, _Link.UsingBandwidth / _Link.Capacity * 100);
+                    else
+                    {
+                        if (_Link.PercentOfBandwidthUsed.Count > 0)
+                            _Link.AddPercentOfBandwidthUsed(_Response, _Link.PercentOfBandwidthUsed.ElementAt(_Link.PercentOfBandwidthUsed.Count - 1).Value);
+                        else
+                            _Link.AddPercentOfBandwidthUsed(_Response, 0);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var _Link in this.Links)
+                {
+                    if (_Link.PercentOfBandwidthUsed.Count > 0)
+                        _Link.AddPercentOfBandwidthUsed(_Response, _Link.PercentOfBandwidthUsed.ElementAt(_Link.PercentOfBandwidthUsed.Count - 1).Value);
+                    else
+                        _Link.AddPercentOfBandwidthUsed(_Response, 0);
+                }
+            }
+        }
     }
 }

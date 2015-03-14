@@ -68,7 +68,8 @@ namespace NetworkSimulator
 
         public string ComputingPrefix { get; set; }
 
-        public string AcceptedBandwidthRatioPrefix { get; set; }
+        //public string AcceptedBandwidthRatioPrefix { get; set; }
+        public string StandardDeviationPrefix { get; set; }
 
         public int NumberOfSplit { get; set; }
 

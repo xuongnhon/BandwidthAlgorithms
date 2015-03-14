@@ -45,8 +45,11 @@ namespace AutomationSRAS.config.simulator
         [XmlElement(ElementName = "ComputingPrefix")]
         public string ComputingPrefix { get; set; }
 
-        [XmlElement(ElementName = "AcceptedBandwidthRatioPrefix")]
-        public string AcceptedBandwidthRatioPrefix { get; set; }
+        //[XmlElement(ElementName = "AcceptedBandwidthRatioPrefix")]
+        //public string AcceptedBandwidthRatioPrefix { get; set; }
+
+        [XmlElement(ElementName = "StandardDeviationPrefix")]
+        public string StandardDeviationPrefix { get; set; }
 
         [XmlElement(ElementName = "NumberOfSplit")]
         public int NumberOfSplit { get; set; }

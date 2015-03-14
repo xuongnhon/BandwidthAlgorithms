@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="NetworkComponents\Tree.cs" />
     <Compile Include="RoutingComponents\CommonAlgorithms\AllSimplePaths.cs" />
+    <Compile Include="RoutingComponents\CommonAlgorithms\MathHelper.cs" />
     <Compile Include="RoutingComponents\MulticastRoutingStrategies\Lmmira.cs" />
     <Compile Include="RoutingComponents\MulticastRoutingStrategies\LmmiraCore.cs" />
     <Compile Include="RoutingComponents\MulticastRoutingStrategies\MulticastRoutingStrategy.cs" />

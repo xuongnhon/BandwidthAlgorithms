@@ -174,7 +174,7 @@ namespace NetworkSimulator.StatisticsComponents
             Configuration cfg = Configuration.GetInstance();
             string resultText = cfg.getSelectedUnicastAlgorithm().Name;
             string computingResultText = cfg.getSelectedUnicastAlgorithm().Name;
-            string acceptedBandwidthRatioResultText = cfg.getSelectedUnicastAlgorithm().Name;
+            //string acceptedBandwidthRatioResultText = cfg.getSelectedUnicastAlgorithm().Name;
             List<int> splits = new List<int>();
             int splitNum = cfg.NumberOfSplit;
             int numsRequest = _ResponsesForStatistics.Count();
@@ -220,7 +220,7 @@ namespace NetworkSimulator.StatisticsComponents
 
                 resultText += "\t" + numAccepted;
                 computingResultText += "\t" + computingTime;
-                acceptedBandwidthRatioResultText += "\t" + acceptedBandwidthRatio;
+                //acceptedBandwidthRatioResultText += "\t" + acceptedBandwidthRatio;
             }
 
             // check for directory exist
@@ -292,7 +292,8 @@ namespace NetworkSimulator.StatisticsComponents
             wrcf.WriteLine(computingResultText);
             wrcf.Close();
             cf.Close();
-
+            
+            /*
             // if result file not exist create the split info and create a new file
             string acceptedBandwidthRatioFile = cfg.StatisticsFilepath + "." + cfg.AcceptedBandwidthRatioPrefix;
             //string acceptedBandwidthRatioFile = string.Format("{0}\\{2}_[{1}].{2}", cfg.StatisticsFilepath, fileRequestName, cfg.AcceptedBandwidthRatioPrefix);
@@ -317,7 +318,95 @@ namespace NetworkSimulator.StatisticsComponents
             StreamWriter wrca = new StreamWriter(af);
             wrca.WriteLine(acceptedBandwidthRatioResultText);
             wrca.Close();
-            af.Close();
+            af.Close();*/
+        }
+
+        public static void WriteStandardDeviationResultToText(List<Response> _ResponsesForStatistics, NetworkSimulator.NetworkComponents.Topology _Topology)
+        {
+            Configuration cfg = Configuration.GetInstance();
+            string standardDeviationResultText = cfg.getSelectedUnicastAlgorithm().Name;
+            List<int> splits = new List<int>();
+            int splitNum = 20;//Hard code
+            int numsRequest = _ResponsesForStatistics.Count();
+            int counter = 0;
+            while (counter <= numsRequest)
+            {
+                counter += splitNum;
+                if (counter <= numsRequest)
+                {
+                    splits.Add(counter);
+                }
+                else
+                {
+                    if (splits.Count > 0)
+                    {
+                        if (splits.ElementAt(splits.Count - 1) < numsRequest)
+                            splits.Add(numsRequest);
+                    }
+                    else
+                        splits.Add(numsRequest);
+                }
+            }
+
+
+            foreach (int i in splits)
+            {
+                List<Response> result = (from rs in _ResponsesForStatistics select rs)
+                                                .Skip(0)
+                                                .Take(i)
+                                                .ToList<Response>();
+                Response _Response = null;
+                if (result.Count > 0)
+                    _Response = result.ElementAt(result.Count - 1);
+                List<double> _Values = new List<double>();
+                if (!Object.Equals(_Response, null))
+                {
+                    foreach (var _Link in _Topology.Links)
+                    {
+                        var _Victim = _Link.PercentOfBandwidthUsed.Where(item => Object.Equals(item.Key, _Response)).FirstOrDefault();
+                        if (!Object.Equals(_Victim, null))
+                            _Values.Add(_Victim.Value);
+                    }
+                }
+                standardDeviationResultText += "\t" + NetworkSimulator.RoutingComponents.CommonAlgorithms.MathHelper.StandardDeviation(_Values);
+            }
+
+            // check for directory exist
+            string[] dir = cfg.StatisticsFilepath.Split('\\');
+            string directory = "";
+            for (int i = 0; i < dir.Count() - 1; i++)
+            {
+                directory += dir[i] + "\\";
+            }
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            // if result file not exist create the split info and create a new file
+            string resultfile = cfg.StatisticsFilepath + "." + cfg.StandardDeviationPrefix;
+            if (!File.Exists(resultfile))
+            {
+                string info = "#";
+                foreach (int i in splits)
+                {
+                    info += "\t" + i;
+                }
+                FileStream fileResult = new FileStream(resultfile, FileMode.Create);
+                StreamWriter wr = new StreamWriter(fileResult);
+                wr.WriteLine(info);
+                wr.Dispose();
+                wr.Close();
+                fileResult.Dispose();
+                fileResult.Close();
+            }
+
+            // Append to text file
+            FileStream f = new FileStream(resultfile, FileMode.Append);
+            StreamWriter wrc = new StreamWriter(f);
+            wrc.WriteLine(standardDeviationResultText);
+            wrc.Close();
+            f.Close();
         }
 
         public static void ExportExcel(string FileName, string _Parameter, int _NumOfRequest)

@@ -11,16 +11,17 @@
   <StatisticsFilepath>Result\Mira\2_static_MIRA_P20-20-20-40_bw10-20-30-40_2000.txt</StatisticsFilepath>
   <ResultPrefix>Result</ResultPrefix>
   <ComputingPrefix>Computing</ComputingPrefix>
-  <AcceptedBandwidthRatioPrefix>AcceptedBandwidthRatio</AcceptedBandwidthRatioPrefix>
+  <!--<AcceptedBandwidthRatioPrefix>AcceptedBandwidthRatio</AcceptedBandwidthRatioPrefix>-->
+  <StandardDeviationPrefix>StandardDeviationPrefix</StandardDeviationPrefix>
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
     <RoutingAlgorithm Name="BGHT1" Selected="false" />
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
-    <RoutingAlgorithm Name="PBMTA" Selected="true" />
+    <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
     <RoutingAlgorithm Name="TEARD" Selected="false" />
-    <RoutingAlgorithm Name="MHA" Selected="false" />
+    <RoutingAlgorithm Name="MHA" Selected="true" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
     <RoutingAlgorithm Name="BCRA" Selected="false" />

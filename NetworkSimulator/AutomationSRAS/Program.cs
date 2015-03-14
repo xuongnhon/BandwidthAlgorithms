@@ -63,7 +63,7 @@ namespace AutomationSRAS
                         {
                             simulator.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         }
-                        
+                        simulator.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                         simulator.Start();
                         simulator.WaitForExit();
                         Console.WriteLine("[DONE]\n");

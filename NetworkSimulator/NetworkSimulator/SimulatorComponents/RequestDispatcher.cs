@@ -143,7 +143,7 @@ namespace NetworkSimulator.SimulatorComponents
 
                         _Stopwatch.Restart();
 
-                       // 12/7 ngoctoan
+                        // 12/7 ngoctoan
                         List<Link> path;// = new List<Link>();
                         //if (RoutingStrategy.GetType().Name == "PBWA" || RoutingStrategy.GetType().Name == "NewPBWA" || RoutingStrategy.GetType().Name == "PBMTA")
                         //{
@@ -158,9 +158,10 @@ namespace NetworkSimulator.SimulatorComponents
                         //Edited: 02/08 Dung
 
                         path = _RoutingStrategy.GetPath(request);
-                        
+
                         _Stopwatch.Stop();
                         Response response = new Response(request, path, _Stopwatch.Elapsed.TotalMilliseconds);
+                        ((Topology)_TopologyLockingObject).CalculatePercentOfBandwidthUsedPerLink(response);
                         _ResponseManager.ReceiveResponse(response);
                     }
 
@@ -171,6 +172,5 @@ namespace NetworkSimulator.SimulatorComponents
                 }
             }
         }
-
     }
 }

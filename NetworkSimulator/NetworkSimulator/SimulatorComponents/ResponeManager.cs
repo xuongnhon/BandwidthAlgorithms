@@ -119,6 +119,9 @@ namespace NetworkSimulator.SimulatorComponents
                 Console.WriteLine("Writing result to text file...");
                 Statistics.WriteResultToText(_ResponsesForStatistics);
 
+                Console.WriteLine("Writing standard deviation to text file...");
+                Statistics.WriteStandardDeviationResultToText(_ResponsesForStatistics, (Topology)_TopologyLockingObject);
+
                 Console.WriteLine("Simulator stopping...");
                 SimulatorManager.getInstance().StopSimulate();
             }
