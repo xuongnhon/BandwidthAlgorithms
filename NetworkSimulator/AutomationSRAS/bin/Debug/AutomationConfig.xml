@@ -3,7 +3,7 @@
   <!-- For automatic cutter test, -->
   <Simulator workingDir = "..\..\..\NetworkSimulator\bin\Debug\"
              executorName = "NetworkSimulator.exe"
-             configFile = "config.xml" 
+             configFile = "config.xml"
              showUI = "false"/>
 
   <!--List of algorithms to run (Must exists in network simulator main config file)-->
@@ -12,6 +12,7 @@
     <Algorithm name="WSP"/>
     <Algorithm name="BCRA"/>
     <Algorithm name="MIRA"/>
+    <Algorithm name="NewMIRA"/>
     <Algorithm name="DORA"/>
     <Algorithm name="RRATE"/>
     <Algorithm name="POOA"/>
@@ -27,14 +28,14 @@
   </Algorithms>
 
   <Topologies>
-    <Topology name = "MIRA" 
+    <Topology name = "MIRA"
               filepath = "Map\mira_map.dat"
               IEfilepath = "Map\mira_ie_list.dat"
               requestDir = "Request\Mira\"
               resultDir = "Result\Mira\">
-        <Requests>
-          
-        </Requests>
+      <Requests>
+
+      </Requests>
     </Topology>
 
     <!--<Topology name = "ANSNET"
@@ -67,6 +68,6 @@
       </Requests>
     </Topology>-->
   </Topologies>
-  
+
   <!-- List of request file -->
 </AutomationConfig>

@@ -2,13 +2,13 @@
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TopologyFilePath>Map\mira_map.dat</TopologyFilePath>
   <IEListFilePath>Map\mira_ie_list.dat</IEListFilePath>
-  <RequestFilePath>Request\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt</RequestFilePath>
+  <RequestFilePath>Request\Mira\MIRA_Dynamic_N2_P2_BW-Section[5-30]_24.txt</RequestFilePath>
   <TimerInterval>5</TimerInterval>
   <LogFilePath>D:\log</LogFilePath>
   <LogFileName>MHA.log</LogFileName>
   <LogActivated>false</LogActivated>
   <StatisticsActivated>false</StatisticsActivated>
-  <StatisticsFilepath>Result\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt</StatisticsFilepath>
+  <StatisticsFilepath>Result\Mira\MIRA_Dynamic_N2_P2_BW-Section[5-30]_24.txt</StatisticsFilepath>
   <ResultPrefix>Result</ResultPrefix>
   <ComputingPrefix>Computing</ComputingPrefix>
   <StandardDeviationPrefix>StandardDeviationPrefix</StandardDeviationPrefix>
@@ -25,6 +25,11 @@
     <RoutingAlgorithm Name="WSP" Selected="false" />
     <RoutingAlgorithm Name="BCRA" Selected="false" />
     <RoutingAlgorithm Name="MIRA" Selected="false">
+      <Params>
+        <Param Name="Alpha" Value="1" />
+      </Params>
+    </RoutingAlgorithm>
+    <RoutingAlgorithm Name="NewMIRA" Selected="false">
       <Params>
         <Param Name="Alpha" Value="1" />
       </Params>

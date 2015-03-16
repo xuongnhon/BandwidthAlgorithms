@@ -180,13 +180,18 @@ namespace RequestGenerator
             Console.ReadKey();
             */
             int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 }, { 4, 14 } };
+            //int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 } };//3IE
+            //int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 }, { 4, 14 }, { 0, 12 }, { 1, 14 } };//6IE
             string NAME_MIRA = "MIRA";
 
             int[,] IE_CESNET = new int[,] { { 0, 18 }, { 1, 11 }, { 3, 16 }, { 4, 7 }, { 5, 13 }, { 6, 19 }, { 15, 0 }, { 19, 8 } };
+            //int[,] IE_CESNET = new int[,] { { 0, 18 }, { 1, 11 }, { 3, 16 }, { 4, 7 }, { 5, 13 }, { 6, 19 } };//6IE
+            //int[,] IE_CESNET = new int[,] { { 0, 18 }, { 1, 11 }, { 3, 16 }, { 4, 7 }, { 5, 13 }, { 6, 19 }, { 15, 0 }, { 19, 8 }, { 1, 13 }, { 8, 19 } };//10IE
             string NAME_CESNET = "CESNET";
 
-            //int[,] IE_ANSNET = new int[,] { { 0, 28 }, { 1, 13 }, { 2, 30 }, { 3, 22 }, { 4, 10 }, { 6, 30 }, { 8, 23 }, { 21, 5 }, { 17, 5 }, { 20, 16 } };
             int[,] IE_ANSNET = new int[,] { { 1, 29 }, { 18, 6 }, { 3, 23 }, { 7, 31 }, { 21, 17 } };
+            //int[,] IE_ANSNET = new int[,] { { 1, 29 }, { 18, 6 }, { 3, 23 } };//3IE
+            //int[,] IE_ANSNET = new int[,] { { 1, 29 }, { 18, 6 }, { 3, 23 }, { 7, 31 }, { 21, 17 }, { 6, 21 }, { 4, 25 } };//IE7
             string NAME_ANSNET = "ANSNET";
 
             string Input = "";
@@ -580,7 +585,7 @@ namespace RequestGenerator
                 Console.WriteLine("Processing...");
                 Configuration _Configuration = new Configuration(TopologyName, IE, intTypeOfRequest, intNumberOfRequest, _PercentUse, _Bandwidth);
 
-                string strDirectory = string.Format("KQ\\{0}", TopologyName);
+                string strDirectory = string.Format("KQ\\{0}_{1}IE", TopologyName, IE.GetLength(0));
                 if (!Directory.Exists(strDirectory))
                 {
                     Directory.CreateDirectory(strDirectory);
@@ -590,7 +595,7 @@ namespace RequestGenerator
                 {
                     for (int i = 0; i < NumberOfFiles; i++)
                     {
-                        FILENAME = string.Format("{0}\\{1}_{2}_{3}_{4}_{5}.txt", strDirectory, TopologyName, _Configuration.RequestTypeName, _Configuration.PercentUse.Name, _Configuration.Bandwidth.Name, i + 1);
+                        FILENAME = string.Format("{0}\\{1}_{2}IE_{3}_{4}_{5}_{6}.txt", strDirectory, TopologyName, IE.GetLength(0), _Configuration.RequestTypeName, _Configuration.PercentUse.Name, _Configuration.Bandwidth.Name, i + 1);
                         Console.WriteLine(string.Format("Creating {0}", FILENAME));
                         StaticScenario _StaticScenario = new StaticScenario(_Configuration, 5);
                         _StaticScenario.GenerateNEW(FILENAME);
@@ -600,7 +605,7 @@ namespace RequestGenerator
                 {
                     for (int i = 0; i < NumberOfFiles; i++)
                     {
-                        FILENAME = string.Format("{0}\\{1}_{2}_{3}_{4}_{5}_{6}.txt", strDirectory, TopologyName, _Configuration.RequestTypeName, _DynamicRequestName, _Configuration.PercentUse.Name, _Configuration.Bandwidth.Name, i + 1);
+                        FILENAME = string.Format("{0}\\{1}_{2}IE_{3}_{4}_{5}_{6}_{7}.txt", strDirectory, TopologyName, IE.GetLength(0), _Configuration.RequestTypeName, _DynamicRequestName, _Configuration.PercentUse.Name, _Configuration.Bandwidth.Name, i + 1);
                         Console.WriteLine(string.Format("Creating {0}", FILENAME));
                         DynamicScrenario _DynamicScrenario = new DynamicScrenario(_Configuration, 400, intLamda, intMy);
                         _DynamicScrenario.GenerateNEW(FILENAME);

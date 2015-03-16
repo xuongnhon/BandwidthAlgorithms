@@ -116,6 +116,11 @@ namespace NetworkSimulator.SimulatorComponents
                     Statistics.Ex(_ResponsesForStatistics);
                 }
 
+                //Response1.ComputingTime = Response2.ComputingTime
+                //Because Response1.ComputingTime is very big :v
+                if (_ResponsesForStatistics.Count >= 2)
+                    _ResponsesForStatistics.ElementAt(0).ComputingTime = _ResponsesForStatistics.ElementAt(1).ComputingTime;
+
                 Console.WriteLine("Writing result to text file...");
                 Statistics.WriteResultToText(_ResponsesForStatistics);
 

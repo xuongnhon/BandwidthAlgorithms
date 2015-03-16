@@ -130,6 +130,9 @@ namespace NetworkSimulator.SimulatorComponents
                     case "MIRA":
                         rs = new MIRA(_Topology) { Alpha = ca.GetParam<int>("Alpha") };
                         break;
+                    case "NewMIRA":
+                        rs = new NewMIRA(_Topology) { Alpha = ca.GetParam<int>("Alpha") };
+                        break;
                     case "DORA":
                         rs = new DORA(_Topology) { BWP = ca.GetParam<double>("BWP") };
                         break;

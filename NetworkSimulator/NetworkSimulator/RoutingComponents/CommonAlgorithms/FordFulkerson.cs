@@ -131,5 +131,21 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             RestoreTopology();
             return subflow;
         }
+
+        public Dictionary<Link, double> SubFlowOfAllLinks(Node source, Node destination)
+        {
+            Dictionary<Link, double> subflows = new Dictionary<Link,double>();
+            BackupTopology();
+            MaxFlow(source, destination);
+
+            foreach (var link in _Topology.Links)
+            {
+                double subflow = _Topology.GetLink(link.Source, link.Destination).UsingBandwidth;
+                subflows.Add(link, subflow);
+            }
+            
+            RestoreTopology();
+            return subflows;
+        }
     }
 }
