@@ -8,7 +8,7 @@ using NetworkSimulator.RoutingComponents.CommonAlgorithms;
 
 namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 {
-    public class BGLC:RoutingStrategy
+    public class BGLC : RoutingStrategy
     {
         private Dictionary<IEPair, List<List<Link>>> _P;
         private Dictionary<Link, double> _Cl;
@@ -32,14 +32,26 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         private void DoOffinePhase()
         {
+            // caoth
+            double totalNumberOfPaths = 0;
+
             foreach (var ie in _Topology.IEPairs)
             {
                 AllSimplePaths asp = new AllSimplePaths(_Topology);
                 _P[ie] = asp.GetPaths(ie.Ingress, ie.Egress);
 
                 foreach (var path in _P[ie])
+                {
                     foreach (var link in path)
-                        _Cl[link] += 1d / _P[ie].Count;
+                        _Cl[link] += 1d; // / _P[ie].Count;
+                }
+
+                totalNumberOfPaths += _P[ie].Count;
+            }
+
+            foreach (Link link in _Topology.Links)
+            {
+                _Cl[link] = _Cl[link] / totalNumberOfPaths;
             }
         }
 

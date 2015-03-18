@@ -7,5 +7,6 @@ C:\Users\Len Kagamine\Desktop\Bandwidth\BandwidthAlgorithms\NetworkSimulator\Aut
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\bin\Debug\AutomationSRAS.exe.config
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\bin\Debug\AutomationSRAS.exe
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\bin\Debug\AutomationSRAS.pdb
+C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\obj\Debug\AutomationSRAS.csprojResolveAssemblyReference.cache
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\obj\Debug\AutomationSRAS.exe
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\AutomationSRAS\obj\Debug\AutomationSRAS.pdb

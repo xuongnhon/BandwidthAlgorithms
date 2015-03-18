@@ -2,24 +2,24 @@
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TopologyFilePath>Map\mira_map.dat</TopologyFilePath>
   <IEListFilePath>Map\mira_ie_list.dat</IEListFilePath>
-  <RequestFilePath>Request\Mira\MIRA_Dynamic_N2_P2_BW-Section[5-30]_24.txt</RequestFilePath>
+  <RequestFilePath>Request\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt</RequestFilePath>
   <TimerInterval>5</TimerInterval>
   <LogFilePath>D:\log</LogFilePath>
   <LogFileName>MHA.log</LogFileName>
   <LogActivated>false</LogActivated>
   <StatisticsActivated>false</StatisticsActivated>
-  <StatisticsFilepath>Result\Mira\MIRA_Dynamic_N2_P2_BW-Section[5-30]_24.txt</StatisticsFilepath>
+  <StatisticsFilepath>Result\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt</StatisticsFilepath>
   <ResultPrefix>Result</ResultPrefix>
   <ComputingPrefix>Computing</ComputingPrefix>
   <StandardDeviationPrefix>StandardDeviationPrefix</StandardDeviationPrefix>
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
-    <RoutingAlgorithm Name="BGHT1" Selected="false" />
+    <RoutingAlgorithm Name="BGHT1" Selected="true" />
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
-    <RoutingAlgorithm Name="TEARD" Selected="true" />
+    <RoutingAlgorithm Name="TEARD" Selected="false" />
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
@@ -36,13 +36,13 @@
     </RoutingAlgorithm>
     <RoutingAlgorithm Name="DORA" Selected="false">
       <Params>
-        <Param Name="BWP" Value="0.9" />
+        <Param Name="BWP" Value="0.5" />
       </Params>
     </RoutingAlgorithm>
     <RoutingAlgorithm Name="RRATE" Selected="false">
       <Params>
-        <Param Name="K" Value="30" />
-        <Param Name="N" Value="15" />
+        <Param Name="K" Value="25" />
+        <Param Name="N" Value="10" />
         <Param Name="K1" Value="0.5" />
         <Param Name="K2" Value="0.5" />
       </Params>
