@@ -9,7 +9,6 @@
   <!--List of algorithms to run (Must exists in network simulator main config file)-->
   <Algorithms>
     <Algorithm name="MHA"/>
-    <Algorithm name="WSP"/>
     <Algorithm name="BCRA"/>
     <Algorithm name="MIRA"/>
     <Algorithm name="NewMIRA"/>

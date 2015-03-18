@@ -20,11 +20,15 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         static Dictionary<Link, List<long>> _LinkReleaseTime;
         static Dictionary<Link, List<double>> _LinkReleaseBandwidth;
 
-        static List<long> _RequestICT;
+        //Fix _RequestICT, khong duyet lai, gay cham
+        //static List<long> _RequestICT;
         static List<double> _RequestBandwidth;
 
 
-        Dictionary<Link, double> _LinkCost; 
+        Dictionary<Link, double> _LinkCost;
+
+        //Fix _RequestICT, khong duyet lai, gay cham
+        static long sumIncommingTime, lastIncommingTime, countRequest;
 
         public BGHT1(Topology topology)
             : base(topology)
@@ -32,7 +36,15 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             r_troj = new Random();
             _LinkReleaseTime = new Dictionary<Link, List<long>>();
             _LinkReleaseBandwidth = new Dictionary<Link, List<double>>();
-            _RequestICT = new List<long>();
+
+            //Fix _RequestICT, khong duyet lai, gay cham
+            //_RequestICT = new List<long>();
+
+            //Fix _RequestICT, khong duyet lai, gay cham
+            sumIncommingTime = 0;
+            lastIncommingTime = 0;
+            countRequest = 0;
+
             _RequestBandwidth = new List<double>();
             _LinkCost = new Dictionary<Link, double>();
             _Dijkstra = new Dijkstra(topology);
@@ -64,13 +76,16 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         }
 
-        
+
 
         public override List<Link> GetPath(SimulatorComponents.Request request)
         {
             List<Link> path = new List<Link>();
             EliminateAllLinksNotSatisfy(request.Demand);
-            _RequestICT.Add(request.IncomingTime);
+            //_RequestICT.Add(request.IncomingTime);
+            //Fix _RequestICT, khong duyet lai, gay cham
+            countRequest++;
+
             _RequestBandwidth.Add(request.Demand);
 
 
@@ -89,7 +104,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             #endregion
 
             #region Compute Window Size by Triangle Distribution
-            if (_RequestICT.Count == 1)
+            /*if (_RequestICT.Count == 1)
             {
                 _MinTime = _MaxTime = _Mode = request.IncomingTime;
             }
@@ -119,6 +134,48 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 }
             }
 
+            _WindowSize = (long)GetTriagleDistribution(_MinTime, _MaxTime, _Mode);*/
+            #endregion
+
+            //Fix _RequestICT, khong duyet lai, gay cham
+            #region Compute Window Size by Triangle Distribution
+            if (countRequest == 1)
+            {
+                _MinTime = _MaxTime = _Mode = request.IncomingTime;
+                lastIncommingTime = request.IncomingTime;
+            }
+            else
+            {
+                //Tính tổng thời gian vào của tất cả các request đã có
+                //tại sao phải duyệt lại
+
+                //Reset Mode
+                _Mode = 0;
+
+                /*for (int i = 0; i < _RequestICT.Count - 1; i++)
+                {
+                    _Mode += _RequestICT[i + 1] - _RequestICT[i];
+                }*/
+                sumIncommingTime += request.IncomingTime - lastIncommingTime;
+
+                //_Mode /= _RequestICT.Count - 1;
+                _Mode = sumIncommingTime / (countRequest - 1);
+
+
+                //long tmp = _RequestICT[_RequestICT.Count - 1] - _RequestICT[_RequestICT.Count - 2];
+                long tmp = request.IncomingTime - lastIncommingTime;
+                lastIncommingTime = request.IncomingTime;
+
+                if (tmp < _MinTime)
+                {
+                    _MinTime = tmp;
+                }
+                if (tmp > _MaxTime)
+                {
+                    _MaxTime = tmp;
+                }
+            }
+
             _WindowSize = (long)GetTriagleDistribution(_MinTime, _MaxTime, _Mode);
             #endregion
 
@@ -132,7 +189,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                         totalBw += _LinkReleaseBandwidth[link][i];
                     }
                 }
-               _LinkCost[link] = 1 / (totalBw + link.ResidualBandwidth);
+                _LinkCost[link] = 1 / (totalBw + link.ResidualBandwidth);
 
             }
 
