@@ -26,6 +26,8 @@ namespace NetworkSimulator.SimulatorComponents
         {
         }
 
+        public List<Response> ResponsesToRelease { get { return _ResponsesToRelease; } }
+
         public ResponseManager(RequestDispatcher requestDispatcher, Ticker ticker, Object topologyLockingObject)
         {
             Initialize();

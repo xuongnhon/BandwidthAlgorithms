@@ -99,7 +99,7 @@ namespace NetworkSimulator.SimulatorComponents
                         break;
 
                     case "BGHT1":
-                        rs = new BGHT1(_Topology);
+                        rs = new BGHT1(_Topology, _ResponseManager);
                         break;
 
                     case "BGHT2":

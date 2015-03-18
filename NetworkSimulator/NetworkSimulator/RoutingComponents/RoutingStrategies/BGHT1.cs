@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NetworkSimulator.NetworkComponents;
 using NetworkSimulator.RoutingComponents.CommonAlgorithms;
+using Troschuetz.Random;
 
 namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 {
@@ -17,25 +18,27 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         Random r_troj;
         Dijkstra _Dijkstra;
 
-        static Dictionary<Link, List<long>> _LinkReleaseTime;
-        static Dictionary<Link, List<double>> _LinkReleaseBandwidth;
+        //static Dictionary<Link, List<long>> _LinkReleaseTime;
+        //static Dictionary<Link, List<double>> _LinkReleaseBandwidth;
+        static Dictionary<Link, double> _TotalBandwidth;
+        static Dictionary<Link, bool> _NeedToReset;
 
         //Fix _RequestICT, khong duyet lai, gay cham
         //static List<long> _RequestICT;
-        static List<double> _RequestBandwidth;
-
+        //static List<double> _RequestBandwidth;
 
         Dictionary<Link, double> _LinkCost;
 
         //Fix _RequestICT, khong duyet lai, gay cham
         static long sumIncommingTime, lastIncommingTime, countRequest;
+        NetworkSimulator.SimulatorComponents.ResponseManager _ResponseManager;
 
         public BGHT1(Topology topology)
             : base(topology)
         {
             r_troj = new Random();
-            _LinkReleaseTime = new Dictionary<Link, List<long>>();
-            _LinkReleaseBandwidth = new Dictionary<Link, List<double>>();
+            //_LinkReleaseTime = new Dictionary<Link, List<long>>();
+            //_LinkReleaseBandwidth = new Dictionary<Link, List<double>>();
 
             //Fix _RequestICT, khong duyet lai, gay cham
             //_RequestICT = new List<long>();
@@ -44,8 +47,34 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             sumIncommingTime = 0;
             lastIncommingTime = 0;
             countRequest = 0;
+            _TotalBandwidth = new Dictionary<Link, double>();
+            _NeedToReset = new Dictionary<Link, bool>();
 
-            _RequestBandwidth = new List<double>();
+            //_RequestBandwidth = new List<double>();
+            _LinkCost = new Dictionary<Link, double>();
+            _Dijkstra = new Dijkstra(topology);
+            Initialize();
+        }
+
+        public BGHT1(Topology topology, NetworkSimulator.SimulatorComponents.ResponseManager _ResponseManager)
+            : base(topology)
+        {
+            r_troj = new Random();
+            //_LinkReleaseTime = new Dictionary<Link, List<long>>();
+            //_LinkReleaseBandwidth = new Dictionary<Link, List<double>>();
+
+            //Fix _RequestICT, khong duyet lai, gay cham
+            //_RequestICT = new List<long>();
+
+            //Fix _RequestICT, khong duyet lai, gay cham
+            sumIncommingTime = 0;
+            lastIncommingTime = 0;
+            countRequest = 0;
+            this._ResponseManager = _ResponseManager;
+            _TotalBandwidth = new Dictionary<Link, double>();
+            _NeedToReset = new Dictionary<Link, bool>();
+
+            //_RequestBandwidth = new List<double>();
             _LinkCost = new Dictionary<Link, double>();
             _Dijkstra = new Dijkstra(topology);
             Initialize();
@@ -55,8 +84,10 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         {
             foreach (var link in _Topology.Links)
             {
-                _LinkReleaseTime[link] = new List<long>();
-                _LinkReleaseBandwidth[link] = new List<double>();
+                //_LinkReleaseTime[link] = new List<long>();
+                //_LinkReleaseBandwidth[link] = new List<double>();
+                _TotalBandwidth.Add(link, 0);
+                _NeedToReset.Add(link, true);
             }
             _MaxTime = _MinTime = 0;
         }
@@ -76,8 +107,6 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         }
 
-
-
         public override List<Link> GetPath(SimulatorComponents.Request request)
         {
             List<Link> path = new List<Link>();
@@ -86,11 +115,10 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             //Fix _RequestICT, khong duyet lai, gay cham
             countRequest++;
 
-            _RequestBandwidth.Add(request.Demand);
-
+            //_RequestBandwidth.Add(request.Demand);
 
             #region Remove value of released requests
-            foreach (var link in _Topology.Links)
+            /*foreach (var link in _Topology.Links)
             {
                 for (int i = 0; i < _LinkReleaseTime[link].Count; i++)
                 {
@@ -100,7 +128,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                         _LinkReleaseBandwidth[link].RemoveAt(i);
                     }
                 }
-            }
+            }*/
             #endregion
 
             #region Compute Window Size by Triangle Distribution
@@ -152,15 +180,14 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 //Reset Mode
                 _Mode = 0;
 
-                /*for (int i = 0; i < _RequestICT.Count - 1; i++)
-                {
-                    _Mode += _RequestICT[i + 1] - _RequestICT[i];
-                }*/
+                //for (int i = 0; i < _RequestICT.Count - 1; i++)
+                //{
+                //    _Mode += _RequestICT[i + 1] - _RequestICT[i];
+                //}
                 sumIncommingTime += request.IncomingTime - lastIncommingTime;
 
                 //_Mode /= _RequestICT.Count - 1;
                 _Mode = sumIncommingTime / (countRequest - 1);
-
 
                 //long tmp = _RequestICT[_RequestICT.Count - 1] - _RequestICT[_RequestICT.Count - 2];
                 long tmp = request.IncomingTime - lastIncommingTime;
@@ -176,38 +203,78 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 }
             }
 
-            _WindowSize = (long)GetTriagleDistribution(_MinTime, _MaxTime, _Mode);
+            TriangularDistribution _TriangularDistribution = new TriangularDistribution();
+            _TriangularDistribution.Alpha = _MinTime;
+            _TriangularDistribution.Beta = _MaxTime;
+            _TriangularDistribution.Gamma = _Mode;
+            _WindowSize = (long)_TriangularDistribution.NextDouble();
             #endregion
 
-            foreach (var link in _Topology.Links)
+            List<NetworkSimulator.SimulatorComponents.Response> listResponseWillRelease = new List<SimulatorComponents.Response>();
+            foreach (var _Response in _ResponseManager.ResponsesToRelease)
+            {
+                if (_Response.ReleasingTime <= (request.IncomingTime + _WindowSize))
+                {
+                    listResponseWillRelease.Add(_Response);
+                }
+                else break;
+            }
+
+            List<NetworkSimulator.NetworkComponents.Link> listLinkNeedToReset = new List<Link>();
+            foreach (var _Response in listResponseWillRelease)
+            {
+                foreach (var _Link in _Response.Path)
+                {
+                    if (_NeedToReset[_Link])
+                    {
+                        listLinkNeedToReset.Add(_Link);
+                        _NeedToReset[_Link] = false;
+                        _TotalBandwidth[_Link] = _Response.Request.Demand;
+                    }
+                    else
+                    {
+                        _TotalBandwidth[_Link] += _Response.Request.Demand;
+                    }
+                }
+            }
+
+            foreach (var _Link in _Topology.Links)
+            {
+                if (_NeedToReset[_Link])
+                    _LinkCost[_Link] = 1 / _Link.ResidualBandwidth;
+                else
+                    _LinkCost[_Link] = 1 / (_TotalBandwidth[_Link] + _Link.ResidualBandwidth);
+            }
+
+            foreach (var _Link in listLinkNeedToReset)
+            { _NeedToReset[_Link] = true; }
+
+            /*foreach (var link in _Topology.Links)
             {
                 double totalBw = 0;
                 for (int i = 0; i < _LinkReleaseTime[link].Count; i++)
                 {
-                    if (_LinkReleaseTime[link][i] <= (request.IncomingTime + _WindowSize) && request.HoldingTime != int.MaxValue)
+                    if (request.HoldingTime != int.MaxValue && _LinkReleaseTime[link][i] <= (request.IncomingTime + _WindowSize))
                     {
                         totalBw += _LinkReleaseBandwidth[link][i];
                     }
                 }
                 _LinkCost[link] = 1 / (totalBw + link.ResidualBandwidth);
-
-            }
+            }*/
 
             path = _Dijkstra.GetShortestPath(request.SourceId, request.DestinationId, _LinkCost);
 
             //Save info new path
-            foreach (var link in path)
+            /*foreach (var link in path)
             {
                 long tmpHoldingTime = request.HoldingTime == int.MaxValue ? request.HoldingTime : request.IncomingTime + request.HoldingTime;
                 _LinkReleaseTime[link].Add(tmpHoldingTime);
                 //Console.WriteLine(request.HoldingTime +"  ------ "+ int.MaxValue);
                 _LinkReleaseBandwidth[link].Add(request.Demand);
-            }
-
+            }*/
 
             RestoreTopology();
             return path;
         }
-
     }
 }
