@@ -71,7 +71,7 @@ namespace NetworkSimulator.SimulatorComponents
             _RequestDispatcher.Routers = _Routers;
             _RequestDispatcher.ResponseManager = _ResponseManager;
 
-            _Ticker.AddListener(_ResponseManager);
+            _Ticker.AddListener(_ResponseManager); //caoth reponse 1st
             _Ticker.AddListener(_RequestDispatcher);
 
         }
@@ -156,7 +156,7 @@ namespace NetworkSimulator.SimulatorComponents
             }
 
             //Thread.Sleep(100);
-            // vu an 1st request :(            
+            // caoth vu an 1st request :(            
 
             _Ticker.Start();
         }

@@ -162,9 +162,9 @@ namespace NetworkSimulator.SimulatorComponents
                         _Stopwatch.Stop();
                         Response response = new Response(request, path, _Stopwatch.Elapsed.TotalMilliseconds);
 
-                        ((Topology)_TopologyLockingObject).CalculatePercentOfBandwidthUsedPerLink(response);
-
                         _ResponseManager.ReceiveResponse(response);
+
+                        ((Topology)_TopologyLockingObject).CalculatePercentOfBandwidthUsedPerLink(response);
                     }
 
                     // caoth

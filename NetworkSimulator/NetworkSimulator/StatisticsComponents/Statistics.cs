@@ -292,7 +292,7 @@ namespace NetworkSimulator.StatisticsComponents
             wrcf.WriteLine(computingResultText);
             wrcf.Close();
             cf.Close();
-            
+
             /*
             // if result file not exist create the split info and create a new file
             string acceptedBandwidthRatioFile = cfg.StatisticsFilepath + "." + cfg.AcceptedBandwidthRatioPrefix;
@@ -326,7 +326,7 @@ namespace NetworkSimulator.StatisticsComponents
             Configuration cfg = Configuration.GetInstance();
             string standardDeviationResultText = cfg.getSelectedUnicastAlgorithm().Name;
             List<int> splits = new List<int>();
-            int splitNum = 20;//Hard code
+            int splitNum = cfg.NumberOfSplit;//Bang nhau het
             int numsRequest = _ResponsesForStatistics.Count();
             int counter = 0;
             while (counter <= numsRequest)
@@ -368,6 +368,7 @@ namespace NetworkSimulator.StatisticsComponents
                             _Values.Add(_Victim.Value);
                     }
                 }
+                
                 standardDeviationResultText += "\t" + NetworkSimulator.RoutingComponents.CommonAlgorithms.MathHelper.StandardDeviation(_Values);
             }
 
