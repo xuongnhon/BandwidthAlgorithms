@@ -11,7 +11,7 @@
   <StatisticsFilepath>Result\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt</StatisticsFilepath>
   <ResultPrefix>Result</ResultPrefix>
   <ComputingPrefix>Computing</ComputingPrefix>
-  <StandardDeviationPrefix>StandardDeviationPrefix</StandardDeviationPrefix>
+  <StandardDeviationPrefix>StandardDeviation</StandardDeviationPrefix>
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
