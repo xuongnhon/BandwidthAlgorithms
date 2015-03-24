@@ -41,17 +41,21 @@
     </RoutingAlgorithm>
     <RoutingAlgorithm Name="RRATE" Selected="false">
       <Params>
-        <Param Name="K" Value="25" />
-        <Param Name="N" Value="10" />
+        <Param Name="K" Value="30" />
+        <Param Name="N" Value="50" />
         <Param Name="K1" Value="0.5" />
         <Param Name="K2" Value="0.5" />
       </Params>
     </RoutingAlgorithm>
+	<!--K=30, N=50, -->
+	<!--OLD K=25, N=10, -->
     <RoutingAlgorithm Name="POOA" Selected="false">
       <Params>
-        <Param Name="K" Value="20" />
+        <Param Name="K" Value="25" />
       </Params>
     </RoutingAlgorithm>
+	<!--K=25-->
+	<!--OLD K=20-->
   </UnicastRoutingAlgorithms>
   <MulticastRoutingAlgorithms>
     <RoutingAlgorithm Name="SPT" Selected="false" />

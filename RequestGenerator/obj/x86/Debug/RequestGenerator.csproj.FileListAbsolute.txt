@@ -23,5 +23,6 @@ C:\Users\Len Kagamine\Desktop\Bandwidth\BandwidthAlgorithms\RequestGenerator\obj
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\bin\Debug\RequestGenerator.exe
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\bin\Debug\RequestGenerator.pdb
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\bin\Debug\Troschuetz.Random.dll
+C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\obj\x86\Debug\RequestGenerator.csprojResolveAssemblyReference.cache
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\obj\x86\Debug\RequestGenerator.exe
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\RequestGenerator\obj\x86\Debug\RequestGenerator.pdb
