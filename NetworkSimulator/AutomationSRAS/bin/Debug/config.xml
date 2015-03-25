@@ -24,12 +24,12 @@
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
     <RoutingAlgorithm Name="BCRA" Selected="false" />
-    <RoutingAlgorithm Name="MIRA" Selected="true">
+    <RoutingAlgorithm Name="MIRA" Selected="false">
       <Params>
         <Param Name="Alpha" Value="1" />
       </Params>
     </RoutingAlgorithm>
-    <RoutingAlgorithm Name="NewMIRA" Selected="false">
+    <RoutingAlgorithm Name="NewMIRA" Selected="true">
       <Params>
         <Param Name="Alpha" Value="1" />
       </Params>

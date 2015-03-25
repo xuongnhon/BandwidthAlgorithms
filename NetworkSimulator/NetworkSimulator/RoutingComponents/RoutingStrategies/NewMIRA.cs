@@ -65,7 +65,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         // Generate MIRA cost
         private void GenerateNewMIRACost(Node source, Node destination)
         {
-            ResetCostLink();
+            //ResetCostLink();
             foreach (var item in _Topology.IEPairs)
             {
                 // Only use Ingress Egress in IEList, except the actual source and destination
@@ -88,7 +88,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
                 foreach (var link in _Topology.Links)
                 {
-                    _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);
+                    _Cost[link] = subflows[link] / (maxflow * link.ResidualBandwidth);
                 }
             }
         }

@@ -58,7 +58,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             {
                 if (link.ResidualBandwidth > 0)
                 {
-                    _Cost[link] = (Math.Pow(10, 8) / link.Capacity) * (link.UsingBandwidth / link.ResidualBandwidth) + 1;
+                    //_Cost[link] = (Math.Pow(10, 8) / link.Capacity) * (link.UsingBandwidth / link.ResidualBandwidth) + 1;
+                    _Cost[link] = (Math.Pow(10, 8) / link.Capacity) * (link.UsingBandwidth / link.Capacity) + 1;
                 }
             }
 

@@ -93,7 +93,7 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
         public List<Link> FindMinCutSet(Node source, Node destination)
         {
             BackupTopology();
-            MaxFlow(source, destination);
+            double flow = MaxFlow(source, destination);
 
             var sCut = new List<Node>();
             var tCut = new List<Node>();

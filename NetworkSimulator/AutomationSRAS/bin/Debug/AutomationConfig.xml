@@ -8,17 +8,17 @@
 
   <!--List of algorithms to run (Must exists in network simulator main config file)-->
   <Algorithms>
-    <Algorithm name="MHA"/>
-    <!--<Algorithm name="BCRA"/>-->
+    <!--<Algorithm name="MHA"/>
+    <Algorithm name="BCRA"/>-->
     <Algorithm name="MIRA"/>
     <Algorithm name="NewMIRA"/>
-    <Algorithm name="DORA"/>
+    <!--<Algorithm name="DORA"/>
     <Algorithm name="RRATE"/>
     <Algorithm name="POOA"/>
-    <Algorithm name="BGLC"/>
+    <Algorithm name="BGLC"/>-->
     <!--========================================-->
-    <Algorithm name="BGHT1"/>
-    <Algorithm name="TEARD"/>
+    <!--<Algorithm name="BGHT1"/>
+    <Algorithm name="TEARD"/>-->
     <!--Not use-->
     <!--<Algorithm name="RBA"/>
     <Algorithm name="BGHT2"/>
@@ -27,7 +27,7 @@
   </Algorithms>
 
   <Topologies>
-    <Topology name = "MIRA"
+    <!--<Topology name = "MIRA"
               filepath = "Map\mira_map.dat"
               IEfilepath = "Map\mira_ie_list.dat"
               requestDir = "Request\Mira\"
@@ -37,7 +37,7 @@
       </Requests>
     </Topology>
 
-    <!--<Topology name = "ANSNET"
+    <Topology name = "ANSNET"
               filepath = "Map\ansnet_map.dat"
               IEfilepath = "Map\ansnet_ie.dat"
               requestDir = "Request\Ansnet\"
@@ -45,9 +45,9 @@
       <Requests>
         
       </Requests>
-    </Topology>
+    </Topology>-->
 
-    <Topology name = "CESNET"
+    <!--<Topology name = "CESNET"
               filepath = "Map\cesnet_map.dat"
               IEfilepath = "Map\cesnet_ie_list.dat"
               requestDir = "Request\Cesnet\"
@@ -55,9 +55,9 @@
       <Requests>
         
       </Requests>
-    </Topology>
+    </Topology>-->
     
-    <Topology name = "NET1"
+    <!--<Topology name = "NET1"
               filepath = "Map\NET-50Node.dat"
               IEfilepath = "Map\net1_ie.dat"
               requestDir = "Request\NET1\"
@@ -66,6 +66,16 @@
        
       </Requests>
     </Topology>-->
+	
+	<Topology name = "EXAMPLE"
+              filepath = "Map\example_map.dat"
+              IEfilepath = "Map\example_ie_list.dat"
+              requestDir = "Request\EXAMPLE\"
+              resultDir = "Result\EXAMPLE\">
+      <Requests>
+        
+      </Requests>
+    </Topology>
   </Topologies>
 
   <!-- List of request file -->

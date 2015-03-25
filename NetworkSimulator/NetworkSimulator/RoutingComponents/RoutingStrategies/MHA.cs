@@ -9,8 +9,9 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 {
     class MHA : RoutingStrategy
     {
-        private BreadthFirstSearch _BFS;
-
+        //private BreadthFirstSearch _BFS;
+        private Dictionary<Link, double> _Cost;
+        private Dijkstra _Dijsktra;
         
 
         public MHA(Topology topology) 
@@ -21,7 +22,15 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         private void Initialize()
         {
-            _BFS = new BreadthFirstSearch(_Topology);
+            //_BFS = new BreadthFirstSearch(_Topology);
+
+            _Cost = new Dictionary<Link, double>();
+            _Dijsktra = new Dijkstra(_Topology);
+
+            foreach (var link in _Topology.Links)
+            {
+                _Cost[link] = 1;
+            }
         }
 
         //Edited: 02/08 Dung
@@ -41,14 +50,25 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         public override List<Link> GetPath(SimulatorComponents.Request request)
         {
-            List<Link> path = new List<Link>();
+            //List<Link> path = new List<Link>();
 
-            EliminateAllLinksNotSatisfy(request.Demand);
+            //EliminateAllLinksNotSatisfy(request.Demand);
 
-            path = _BFS.FindPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId]);
+            //path = _BFS.FindPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId]);
             
+            //RestoreTopology();
+
+            //return path;
+
+            // caoth            
+
+            EliminateAllLinksNotSatisfy(request.Demand);           
+
+            // Use dijsktra to get path
+            var resultPath = _Dijsktra.GetShortestPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId], _Cost);
+
             RestoreTopology();
-            return path;
+            return resultPath;
         }
 
 
