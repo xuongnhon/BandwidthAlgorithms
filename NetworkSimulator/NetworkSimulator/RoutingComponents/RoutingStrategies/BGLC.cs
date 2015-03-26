@@ -33,6 +33,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         private void DoOffinePhase()
         {
             // caoth
+            // BGMRA + BGLC example: total lengths instead of paths
             double totalNumberOfPaths = 0;
 
             foreach (var ie in _Topology.IEPairs)
@@ -43,11 +44,17 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 foreach (var path in _P[ie])
                 {
                     foreach (var link in path)
+                    {
                         _Cl[link] += 1d; // / _P[ie].Count;
+                    }
+
+                    totalNumberOfPaths += path.Count;
                 }
 
-                totalNumberOfPaths += _P[ie].Count;
+                //totalNumberOfPaths += _P[ie].Count; // total path
             }
+
+            
 
             foreach (Link link in _Topology.Links)
             {
