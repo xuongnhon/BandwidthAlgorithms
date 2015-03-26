@@ -69,14 +69,17 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             foreach (var item in _Topology.IEPairs)
             {                
                 // caoth
-                double maxflow = 0;//_FordFulkerson.ComputeMaxFlow(item.Ingress, item.Egress);
-                Dictionary<Link, double> subflows = _FordFulkerson.SubFlowOfAllLinks(item.Ingress, item.Egress, ref maxflow);
-                
-
-                foreach (var link in _Topology.Links)
+                if (item.Ingress != source || item.Egress != destination)
                 {
-                    _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);                    
-                }
+                    double maxflow = 0;//_FordFulkerson.ComputeMaxFlow(item.Ingress, item.Egress);
+                    Dictionary<Link, double> subflows = _FordFulkerson.SubFlowOfAllLinks(item.Ingress, item.Egress, ref maxflow);
+
+
+                    foreach (var link in _Topology.Links)
+                    {
+                        _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);
+                    }
+                }                
             }
         }
     }
