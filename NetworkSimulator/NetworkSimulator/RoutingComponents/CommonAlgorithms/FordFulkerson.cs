@@ -20,20 +20,24 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             Initialize();
         }
 
-        private Dictionary<Link, double> _UsingBandwidthCopy;
+        //private Dictionary<Link, double> _UsingBandwidthCopy;
+        private Dictionary<Link, double> _backupResidualBandwidthCopy;
 
         private void Initialize()
         {
             _BFS = new BreadthFirstSearch(_Topology);
-            _UsingBandwidthCopy = new Dictionary<Link, double>();
+            //_UsingBandwidthCopy = new Dictionary<Link, double>();
+            _backupResidualBandwidthCopy = new Dictionary<Link, double>();
         }
 
         private void BackupTopology()
         {
-            _UsingBandwidthCopy.Clear();
+            //_UsingBandwidthCopy.Clear();
+            _backupResidualBandwidthCopy.Clear();
             foreach (var link in _Topology.Links)
             {
-                _UsingBandwidthCopy[link] = link.UsingBandwidth;
+                //_UsingBandwidthCopy[link] = link.UsingBandwidth;
+                _backupResidualBandwidthCopy[link] = link.ResidualBandwidth;
             }
         }
 
@@ -41,7 +45,8 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
         {
             foreach (var link in _Topology.Links)
             {
-                link.UsingBandwidth = _UsingBandwidthCopy[link];
+                //link.UsingBandwidth = _UsingBandwidthCopy[link];
+                link.ResidualBandwidth = _backupResidualBandwidthCopy[link];
             }
         }
 
@@ -95,7 +100,8 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             }
         }
 
-        public List<Link> FindMinCutSet(Node source, Node destination)
+        //public List<Link> FindMinCutSet(Node source, Node destination) // not the mincut set in the paper
+        public List<Link> FindMinCutSetNotInThePaper(Node source, Node destination)
         {
             BackupTopology();
             double flow = MaxFlow(source, destination);
@@ -191,8 +197,8 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
         }
 
         //SAI
-        //public List<Link> FindMinCutSet(Node source, Node destination)
-        public List<Link> FindMinCutSetOld(Node source, Node destination)
+        public List<Link> FindMinCutSet(Node source, Node destination) // caoth redo
+        //public List<Link> FindMinCutSetOld(Node source, Node destination)
         {
             BackupTopology();
             double flow = MaxFlow(source, destination);
@@ -201,23 +207,40 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             var tCut = new List<Node>();
             var minCutSet = new List<Link>();
 
-            foreach (var node in _Topology.Nodes)
-            {
-                if (_BFS.FindPath(node, destination).Count == 0 && node != destination)
-                    sCut.Add(node);
-                else
-                    tCut.Add(node);
+            // find sCut
+            _BFS.FindPathMarkNode(source, source, sCut);
 
+            // find tCut
+            _Topology.Invert();
+            _BFS.FindPathMarkNode(destination, destination, tCut);
+            _Topology.Invert();
+
+            // find mincut sets
+            foreach(Link link in _Topology.Links)
+            {
+                if (link.ResidualBandwidth == 0 && _backupResidualBandwidthCopy[link] > 0)
+                    if (!sCut.Contains(link.Destination) && !tCut.Contains(link.Source))
+                        if (_BFS.FindPath(link.Source, link.Destination).Count == 0)
+                            minCutSet.Add(link);
             }
 
-            foreach (var sNode in sCut)
-            {
-                foreach (var link in sNode.Links)
-                {
-                    if (link.ResidualBandwidth <= 0 && tCut.Contains(link.Destination))
-                        minCutSet.Add(link);
-                }
-            }
+            //foreach (var node in _Topology.Nodes)
+            //{
+            //    if (_BFS.FindPath(node, destination).Count == 0 && node != destination)
+            //        sCut.Add(node);
+            //    else
+            //        tCut.Add(node);
+
+            //}
+
+            //foreach (var sNode in sCut)
+            //{
+            //    foreach (var link in sNode.Links)
+            //    {
+            //        if (link.ResidualBandwidth <= 0 && tCut.Contains(link.Destination))
+            //            minCutSet.Add(link);
+            //    }
+            //}
 
             RestoreTopology();
 

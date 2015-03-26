@@ -239,5 +239,20 @@ namespace NetworkSimulator.NetworkComponents
                 _Link.AddPercentOfBandwidthUsed(_Response, _Link.UsingBandwidth / _Link.Capacity * 100);
             }
         }
+
+        // caoth
+        public void Invert()
+        {
+            foreach (var link in this.Links)
+            {
+                Node oldSource = link.Source;
+
+                link.Source.Links.Remove(link);
+                link.Destination.Links.Add(link);
+
+                link.Source = link.Destination;                
+                link.Destination = oldSource;                                
+            }
+        }
     }
 }

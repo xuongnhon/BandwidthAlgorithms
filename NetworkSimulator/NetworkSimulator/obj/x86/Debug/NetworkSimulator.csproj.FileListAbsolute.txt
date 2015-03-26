@@ -34,3 +34,9 @@ C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\Netw
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.csprojResolveAssemblyReference.cache
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.exe
 C:\Users\Len Kagamine\Documents\GitHub\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.pdb
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.exe
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.pdb
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\NetworkSimulator.exe
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\NetworkSimulator.pdb
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\Troschuetz.Random.dll
+D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.csprojResolveAssemblyReference.cache

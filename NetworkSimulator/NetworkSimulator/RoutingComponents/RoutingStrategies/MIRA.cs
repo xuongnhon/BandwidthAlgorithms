@@ -59,7 +59,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         {
             foreach (Link link in _Topology.Links)
             {
-                _Cost[link] = 1; // caoth gan 0 moi sai, khi tat ca weight = 0, Dijkstra ko tim ra dg di ngan nhat
+                _Cost[link] = double.Epsilon; // caoth gan 0 moi sai, khi tat ca weight = 0, Dijkstra ko tim ra dg di ngan nhat
                // _Cost[link] = 0;
             }
         }
@@ -78,8 +78,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 {
                     var criticalLinks = _FordFulkerson.FindMinCutSet(item.Ingress, item.Egress);
                     foreach (Link link in criticalLinks)
-                    {
-                       
+                    {                       
                         _Cost[link] += _Alpha;
                     }
                 }

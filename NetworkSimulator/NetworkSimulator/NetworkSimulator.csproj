@@ -13,10 +13,14 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>Svn</SccProjectName>
-    <SccLocalPath>Svn</SccLocalPath>
-    <SccAuxPath>Svn</SccAuxPath>
-    <SccProvider>SubversionScc</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -113,6 +117,8 @@
     <None Include="bin\Debug\Map\ansnet_map.dat" />
     <None Include="bin\Debug\Map\cesnet_ie_list.dat" />
     <None Include="bin\Debug\Map\cesnet_map.dat" />
+    <None Include="bin\Debug\Map\example_ie_list.dat" />
+    <None Include="bin\Debug\Map\example_map.dat" />
     <None Include="bin\Debug\Map\lmmira_map.dat" />
     <None Include="bin\Debug\Map\mira_ie_list.dat" />
     <None Include="bin\Debug\Map\mira_map.dat" />

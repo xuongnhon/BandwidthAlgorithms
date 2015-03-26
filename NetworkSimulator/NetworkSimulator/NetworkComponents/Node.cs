@@ -25,6 +25,7 @@ namespace NetworkSimulator.NetworkComponents
         public List<Link> Links
         {
             get { return _Links; }
+            //set { _Links = value; }
         }
 
         public List<Node> Children

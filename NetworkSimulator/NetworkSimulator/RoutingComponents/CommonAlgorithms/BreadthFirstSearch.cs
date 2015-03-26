@@ -63,6 +63,53 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             return GetPath(destination);
         }
 
+        // caoth
+        public List<Link> FindPathMarkNode(Node source, Node destination, List<Node> markedNode)
+        {
+            _Previous.Clear();
+            _Previous[source] = null;
+            _Previous[destination] = null;
+            var queue = new Queue<Node>();
+            var discovered = new HashSet<Node>();
+            queue.Enqueue(source);
+
+            bool found = false;
+
+            while (queue.Count > 0 && !found)
+            {
+                var current = queue.Dequeue();
+                discovered.Add(current);
+                
+                // caoth
+                if (!markedNode.Contains(current))
+                    markedNode.Add(current);   
+
+                //if (current.Key == destination.Key)
+                //    break;
+
+                var links = current.Links;
+                foreach (var link in links)
+                {
+                    var next = link.Destination;
+                    var c = _Topology.GetLink(current, next).ResidualBandwidth;
+                    if (c > 0 && !discovered.Contains(next))
+                    {
+                        queue.Enqueue(next);
+
+                        _Previous[next] = current;
+                        if (Object.Equals(next, destination))
+                        {
+                            found = true;
+                            break;
+                        }
+                        //discovered.Add(next);
+                    }
+                }
+            }
+
+            return GetPath(destination);
+        }
+
         private List<Link> GetPath(Node node)
         {
             var path = new List<Link>();
