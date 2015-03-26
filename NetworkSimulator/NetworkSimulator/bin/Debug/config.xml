@@ -19,12 +19,12 @@
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
-    <RoutingAlgorithm Name="TEARD" Selected="false" />
+    <RoutingAlgorithm Name="TEARD" Selected="true" />
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
     <RoutingAlgorithm Name="BCRA" Selected="false" />
-    <RoutingAlgorithm Name="MIRA" Selected="true">
+    <RoutingAlgorithm Name="MIRA" Selected="false">
       <Params>
         <Param Name="Alpha" Value="1" />
       </Params>

@@ -257,11 +257,11 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             return subflow;
         }
 
-        public Dictionary<Link, double> SubFlowOfAllLinks(Node source, Node destination)
+        public Dictionary<Link, double> SubFlowOfAllLinks(Node source, Node destination, ref double maxflow)
         {
             Dictionary<Link, double> subflows = new Dictionary<Link, double>();
             BackupTopology();
-            MaxFlow(source, destination);
+            maxflow = MaxFlow(source, destination);
 
             foreach (var link in _Topology.Links)
             {

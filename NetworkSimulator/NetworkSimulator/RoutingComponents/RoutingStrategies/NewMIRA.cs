@@ -57,7 +57,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         {
             foreach (Link link in _Topology.Links)
             {
-                _Cost[link] = 1;
+                _Cost[link] = double.Epsilon;
             }
         }
 
@@ -65,30 +65,17 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         // Generate MIRA cost
         private void GenerateNewMIRACost(Node source, Node destination)
         {
-            //ResetCostLink();
+            ResetCostLink();
             foreach (var item in _Topology.IEPairs)
-            {
-                // Only use Ingress Egress in IEList, except the actual source and destination
-
-                //Dung
-                //if (item.Ingress != source && item.Egress != destination)
-                //if (item.Ingress != source || item.Egress != destination)
-                //{
-                //    var criticalLinks = _FordFulkerson.FindMinCutSet(item.Ingress, item.Egress);
-                //    foreach (Link link in criticalLinks)
-                //    {
-
-                //        _Cost[link] += _Alpha;
-                //    }
-                //}
-
+            {                
                 // caoth
-                Dictionary<Link, double> subflows = _FordFulkerson.SubFlowOfAllLinks(item.Ingress, item.Egress);
-                double maxflow = _FordFulkerson.ComputeMaxFlow(item.Ingress, item.Egress);
+                double maxflow = 0;//_FordFulkerson.ComputeMaxFlow(item.Ingress, item.Egress);
+                Dictionary<Link, double> subflows = _FordFulkerson.SubFlowOfAllLinks(item.Ingress, item.Egress, ref maxflow);
+                
 
                 foreach (var link in _Topology.Links)
                 {
-                    _Cost[link] = subflows[link] / (maxflow * link.ResidualBandwidth);
+                    _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);                    
                 }
             }
         }
