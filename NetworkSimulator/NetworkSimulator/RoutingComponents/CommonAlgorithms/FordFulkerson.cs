@@ -81,16 +81,118 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
 
             return flow;
         }
- 
+
         private void AugmentPath(IEnumerable<Link> path, double minCapacity)
         {
             foreach (var link in path)
             {
-                link.UsingBandwidth += minCapacity;
+                link.ResidualBandwidth -= minCapacity;
+
+                var nodeR = link.Destination;
+                var linkR = nodeR.Links.Where(i => Object.Equals(i.Destination, link.Source)).FirstOrDefault();
+                if (!Object.Equals(linkR, null))
+                    linkR.ResidualBandwidth += minCapacity;
             }
         }
 
         public List<Link> FindMinCutSet(Node source, Node destination)
+        {
+            BackupTopology();
+            double flow = MaxFlow(source, destination);
+
+            var queue = new Queue<Node>();
+            var discovered = new HashSet<Node>();
+
+            //var minCut = new List<Node>();
+            //var tCut = new List<Node>();
+            //var minCutSet = new List<Link>();
+
+            var minCutNodes = new List<Node>();
+            var minCutEdges = new List<Link>();
+            queue.Enqueue(source);
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                if (discovered.Contains(current))
+                    continue;
+
+                minCutNodes.Add(current);
+                discovered.Add(current);
+
+                var edges = current.Links;
+                foreach (var edge in edges)
+                {
+                    var next = edge.Destination;
+                    if (edge.ResidualBandwidth <= 0 || discovered.Contains(next))
+                        continue;
+                    queue.Enqueue(next);
+                    minCutEdges.Add(edge);
+                }
+            }
+
+            // bottleneck as a list of arcs
+            var minCutResult = new List<Link>();
+            List<int> nodeIds = minCutNodes.Select(node => node.Key).ToList();
+
+            var nodeKeys = new HashSet<int>();
+            foreach (Node node in minCutNodes)
+                nodeKeys.Add(node.Key);
+
+            var edgeKeys = new HashSet<string>();
+            foreach (Link edge in minCutEdges)
+                edgeKeys.Add(edge.Key);
+
+
+
+
+            //ParseData();// reset the graph
+
+            RestoreTopology();
+
+
+
+            foreach (int id in nodeIds)
+            {
+                var node = _Topology.Nodes[id];
+                var edges = node.Links;
+                foreach (Link edge in edges)
+                {
+                    if (nodeKeys.Contains(edge.Destination.Key))
+                        continue;
+
+                    if (edge.Capacity > 0 && !edgeKeys.Contains(edge.Key))
+                        minCutResult.Add(edge);
+                }
+            }
+
+
+            /*foreach (var node in _Topology.Nodes)
+            {
+                if (_BFS.FindPath(node, destination).Count == 0 && node != destination)
+                    sCut.Add(node);
+                else
+                    tCut.Add(node);
+
+            }
+
+            foreach (var sNode in sCut)
+            {
+                foreach (var link in sNode.Links)
+                {
+                    if (link.ResidualBandwidth <= 0 && tCut.Contains(link.Destination))
+                        minCutSet.Add(link);
+                }
+            }*/
+
+
+
+            return minCutResult;
+        }
+
+        //SAI
+        //public List<Link> FindMinCutSet(Node source, Node destination)
+        public List<Link> FindMinCutSetOld(Node source, Node destination)
         {
             BackupTopology();
             double flow = MaxFlow(source, destination);
@@ -134,7 +236,7 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
 
         public Dictionary<Link, double> SubFlowOfAllLinks(Node source, Node destination)
         {
-            Dictionary<Link, double> subflows = new Dictionary<Link,double>();
+            Dictionary<Link, double> subflows = new Dictionary<Link, double>();
             BackupTopology();
             MaxFlow(source, destination);
 
@@ -143,7 +245,7 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
                 double subflow = _Topology.GetLink(link.Source, link.Destination).UsingBandwidth;
                 subflows.Add(link, subflow);
             }
-            
+
             RestoreTopology();
             return subflows;
         }
