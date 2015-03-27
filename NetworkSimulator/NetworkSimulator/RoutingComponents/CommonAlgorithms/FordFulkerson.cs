@@ -93,10 +93,10 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             {
                 link.ResidualBandwidth -= minCapacity;
 
-                var nodeR = link.Destination;
-                var linkR = nodeR.Links.Where(i => Object.Equals(i.Destination, link.Source)).FirstOrDefault();
-                if (!Object.Equals(linkR, null))
-                    linkR.ResidualBandwidth += minCapacity;
+                //var nodeR = link.Destination;
+                //var linkR = nodeR.Links.Where(i => Object.Equals(i.Destination, link.Source)).FirstOrDefault();
+                //if (!Object.Equals(linkR, null))
+                //    linkR.ResidualBandwidth += minCapacity;//caoth
             }
         }
 
