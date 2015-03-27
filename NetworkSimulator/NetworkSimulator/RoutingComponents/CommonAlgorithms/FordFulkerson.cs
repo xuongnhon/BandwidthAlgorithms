@@ -252,7 +252,10 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
             double subflow;
             BackupTopology();
             MaxFlow(source, destination);
-            subflow = _Topology.GetLink(subLink.Source, subLink.Destination).UsingBandwidth;
+
+            //subflow = _Topology.GetLink(subLink.Source, subLink.Destination).UsingBandwidth; caoth: sai
+            subflow = _backupResidualBandwidthCopy[subLink] - subLink.ResidualBandwidth;
+
             RestoreTopology();
             return subflow;
         }
@@ -265,7 +268,9 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
 
             foreach (var link in _Topology.Links)
             {
-                double subflow = _Topology.GetLink(link.Source, link.Destination).UsingBandwidth;
+                //double subflow = _Topology.GetLink(link.Source, link.Destination).UsingBandwidth;
+
+                double subflow = _backupResidualBandwidthCopy[link] - link.ResidualBandwidth;
                 subflows.Add(link, subflow);
             }
 
