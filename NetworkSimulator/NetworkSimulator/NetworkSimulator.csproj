@@ -135,6 +135,11 @@
     <Content Include="bin\Debug\config.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="bin\Debug\Request\ANSNET\01_dynamic_ANSNET_bw20-40-60-80_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\ANSNET\02_dynamic_ANSNET_bw20-30-40-50_400_2000_80_30.txt" />
+    <Content Include="bin\Debug\Request\ANSNET\03_dynamic_ANSNET_bw20-30-40-50_400_2000_60_20.txt" />
+    <Content Include="bin\Debug\Request\ANSNET\04_static_ANSNET_bw20-30-40-50_1000.txt" />
+    <Content Include="bin\Debug\Request\ANSNET\05_static_ANSNET_bw20-30-40-50_1000.txt" />
     <Content Include="bin\Debug\Request\Cesnet\10_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_3000_40_20.txt" />
     <Content Include="bin\Debug\Request\Cesnet\11_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_3000_80_30.txt" />
     <Content Include="bin\Debug\Request\Cesnet\12_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_80_30.txt" />
@@ -156,6 +161,7 @@
     <Content Include="bin\Debug\Request\Cesnet\7_dynamic_CESNET_P5-10-15-20_bw80-120-160-200_400_2000_40_30.txt" />
     <Content Include="bin\Debug\Request\Cesnet\8_dynamic_CESNET_P5-10-15-20_bw100-130-160-200_400_2000_40_20.txt" />
     <Content Include="bin\Debug\Request\Cesnet\9_dynamic_CESNET_P5-10-15-20_bw100-130-160-200_400_2000_40_20.txt" />
+    <Content Include="bin\Debug\Request\EXAMPLE\Test.txt" />
     <Content Include="bin\Debug\Request\Mira\10_dynamic_MIRA_P10-20-30-40_bw30-35-45-50-20_400_2000_40_30.txt" />
     <Content Include="bin\Debug\Request\Mira\11_dynamic_MIRA_P10-10-40-40_bw13-19-23_400_2000_40_10.txt" />
     <Content Include="bin\Debug\Request\Mira\12_dynamic_MIRA_P10-10-40-40_bw23-29-31-37_400_2000_40_30.txt" />
