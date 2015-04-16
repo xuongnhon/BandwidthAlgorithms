@@ -13,7 +13,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         long _WindowSize;
         static long _MaxTime;
         static long _MinTime;
-        long _Mode;
+        double _Mode;
 
         //Random r_troj;
         Dijkstra _Dijkstra;
@@ -209,7 +209,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             if (countRequest == 1)
             {
                 // _MinTime = _MaxTime = _Mode = request.IncomingTime; caoth
-                _MinTime = _MaxTime = _Mode = 0;
+                _MinTime = _MaxTime = 0;
                 lastIncommingTime = request.IncomingTime;
             }
             else
@@ -217,7 +217,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 _Mode = 0;
 
                 sumIncommingTime += request.IncomingTime - lastIncommingTime;
-                _Mode = sumIncommingTime / (countRequest - 1);
+                _Mode = (double)sumIncommingTime / (countRequest - 1);
 
                 long tmp = request.IncomingTime - lastIncommingTime;
                 lastIncommingTime = request.IncomingTime;
