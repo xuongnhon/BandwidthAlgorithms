@@ -236,7 +236,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             _TriangularDistribution.Beta = _MaxTime; // caoth, max 1st
             _TriangularDistribution.Gamma = _Mode;
             _TriangularDistribution.Alpha = _MaxTime > _MinTime ? _MinTime : (_MaxTime - 0.1); // caoth
-            _WindowSize = (long)_TriangularDistribution.NextDouble();
+            // _WindowSize = (long)_TriangularDistribution.NextDouble(); caoth
+            _WindowSize = (long)Math.Ceiling(_TriangularDistribution.NextDouble());
 
             #endregion
 

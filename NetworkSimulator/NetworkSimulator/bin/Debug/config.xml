@@ -15,10 +15,10 @@
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
-    <RoutingAlgorithm Name="BGHT1" Selected="false" />
+    <RoutingAlgorithm Name="BGHT1" Selected="true" />
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
-    <RoutingAlgorithm Name="BGLC" Selected="true" />
+    <RoutingAlgorithm Name="BGLC" Selected="false" />
     <RoutingAlgorithm Name="TEARD" Selected="false" />
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
