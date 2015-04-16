@@ -208,7 +208,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             #region Compute Window Size by Triangle Distribution
             if (countRequest == 1)
             {
-                _MinTime = _MaxTime = _Mode = request.IncomingTime;
+                // _MinTime = _MaxTime = _Mode = request.IncomingTime; caoth
+                _MinTime = _MaxTime = _Mode = 0;
                 lastIncommingTime = request.IncomingTime;
             }
             else
@@ -221,7 +222,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 long tmp = request.IncomingTime - lastIncommingTime;
                 lastIncommingTime = request.IncomingTime;
 
-                if (tmp < _MinTime)
+                if (tmp < _MinTime || _MinTime == 0) // caoth
                 {
                     _MinTime = tmp;
                 }
@@ -232,9 +233,9 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             }
 
             TriangularDistribution _TriangularDistribution = new TriangularDistribution();
-            _TriangularDistribution.Alpha = _MinTime;
-            _TriangularDistribution.Beta = _MaxTime;
+            _TriangularDistribution.Beta = _MaxTime; // caoth, max 1st
             _TriangularDistribution.Gamma = _Mode;
+            _TriangularDistribution.Alpha = _MaxTime > _MinTime ? _MinTime : (_MaxTime - 0.1); // caoth
             _WindowSize = (long)_TriangularDistribution.NextDouble();
 
             #endregion
