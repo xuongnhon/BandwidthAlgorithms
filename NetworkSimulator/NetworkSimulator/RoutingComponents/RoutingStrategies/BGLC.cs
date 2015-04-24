@@ -13,6 +13,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         private Dictionary<IEPair, List<List<Link>>> _P;
         private Dictionary<Link, double> _Cl;
 
+        double totalNumberOfPaths ;
+
         public BGLC(Topology topology)
             : base(topology)
         {
@@ -33,32 +35,34 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         private void DoOffinePhase()
         {
             // caoth
-            // BGMRA + BGLC example: total lengths instead of paths
-            double totalNumberOfPaths = 0;
+            // caoth No. of demand per link / length of all possible connection
+            // formular (1) of 2012_BGMRA
+            totalNumberOfPaths = 0;
 
             foreach (var ie in _Topology.IEPairs)
             {
                 AllSimplePaths asp = new AllSimplePaths(_Topology);
                 _P[ie] = asp.GetPaths(ie.Ingress, ie.Egress);
 
-                foreach (var path in _P[ie])
-                {
-                    foreach (var link in path)
-                    {
-                        _Cl[link] += 1d; // / _P[ie].Count;
-                    }
+                //foreach (var path in _P[ie])
+                //{
+                //    foreach (var link in path)
+                //    {
+                //        _Cl[link] += 1d; // / _P[ie].Count;
+                //    }
 
-                    totalNumberOfPaths += path.Count;
-                }
+                //    totalNumberOfPaths += path.Count;
+                //}
 
-                //totalNumberOfPaths += _P[ie].Count; // total path
+                totalNumberOfPaths += _P[ie].Count; // total path
             }
 
             
 
             foreach (Link link in _Topology.Links)
             {
-                _Cl[link] = _Cl[link] / totalNumberOfPaths;
+               // _Cl[link] = _Cl[link] / totalNumberOfPaths;
+                _Cl[link] = 1;
             }
         }
 
@@ -75,6 +79,10 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             // find path
             Dijkstra dijkstra = new Dijkstra(_Topology);
             var path = dijkstra.GetShortestPath(request.SourceId, request.DestinationId, w);
+
+            // no. of demand per link
+            foreach (Link link in path)
+                _Cl[link] += 1;
 
             // restore topology
             RestoreTopology();
