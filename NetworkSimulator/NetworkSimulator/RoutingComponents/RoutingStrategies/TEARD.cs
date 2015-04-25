@@ -93,7 +93,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         {            
             foreach (var link in _Topology.Links)
             {
-                _CostLink[link] = 1;
+                //_CostLink[link] = double.Epsilon;
 
                 //_CIe[link] = 0;
 
@@ -111,7 +111,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             {
                 //_Probability[ie] = 0.25;
 
-                _Probability[ie] = 25;
+                //_Probability[ie] = 25;
+                _Probability[ie] = 0;
                 _IECount[ie] = 0;
 
                 // haiz: bad for reroute
@@ -120,6 +121,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 {
                     _CIeLink[ie][link] = 0;
                 }
+
                 List<List<Link>> paths = _ASP.GetPaths(ie.Ingress, ie.Egress);                
                 foreach (var path in paths)
                 {
@@ -152,9 +154,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             foreach (var link in _Topology.Links)
             {
                 //_Load[link] = link.UsingBandwidth *100 / link.Capacity;
-                _Load[link] = link.UsingBandwidth * 100 / link.ResidualBandwidth; // theo bcra
-                //_Load[link] = link.UsingBandwidth / link.ResidualBandwidth; // test bcra here fuck everyone
-                //_Load[link] = link.UsingBandwidth / link.ResidualBandwidth; // theo bcra
+                //_Load[link] = link.UsingBandwidth * 100 / link.ResidualBandwidth;
+                _Load[link] = link.UsingBandwidth / link.ResidualBandwidth;
 
                 //Console.WriteLine("_Load[link]" + _Load[link]);
 
@@ -172,8 +173,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                     _CLink[link] = 0;
                 else
                 {
-                    _CLink[link] = _UsedLinkCount[link] * 100 / _TotalPath;
-                    //_CLink[link] = _UsedLinkCount[link] / _TotalPath;
+                    //_CLink[link] = _UsedLinkCount[link] * 100 / _TotalPath;
+                    _CLink[link] = _UsedLinkCount[link] / _TotalPath;
                 }
 
 
@@ -181,7 +182,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 //Console.WriteLine("_CLink[link]" + _CLink[link]);
 
                 // use k1 k2 k3, công thức cũ
-                _CostLink[link] = (K1 * _CReq[link]) + (K2 * _Load[link]) + (K3 * _CLink[link]);
+                _CostLink[link] = (K1 * _CReq[link]) + (K2 * _Load[link]) + (K3 * _CLink[link]) + double.Epsilon;
 
 
                 //công thức mới [1] * [3]
@@ -253,8 +254,8 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
             foreach (var ie in _Topology.IEPairs)
             {
-                _Probability[ie] = _IECount[ie] * 100 / _TotalRequest;
-                //_Probability[ie] = _IECount[ie] / _TotalRequest;
+                //_Probability[ie] = _IECount[ie] * 100 / _TotalRequest;
+                _Probability[ie] = _IECount[ie] / _TotalRequest;
             }
 
             // Caculator when finish findpath
