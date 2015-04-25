@@ -150,6 +150,19 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         public override List<Link> GetPath(SimulatorComponents.Request request)
         {
+            // Caculator at Requesting time            
+            _TotalRequest += 1;
+            IEPair iepair = (from ie in _Topology.IEPairs
+                             where ie.Ingress.Key == request.SourceId && ie.Egress.Key == request.DestinationId
+                             select ie).First();
+            _IECount[iepair] += 1;
+
+            foreach (var ie in _Topology.IEPairs)
+            {
+                //_Probability[ie] = _IECount[ie] * 100 / _TotalRequest;
+                _Probability[ie] = _IECount[ie] / _TotalRequest;
+            }
+
             // Caculator cost for link
             foreach (var link in _Topology.Links)
             {
@@ -243,20 +256,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             // Use dijsktra to get path
             EliminateAllLinksNotSatisfy(request.Demand);
             var resultPath = _Dijkstra.GetShortestPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId], _CostLink);
-            RestoreTopology();
-
-            // Caculator at Requesting time            
-            _TotalRequest += 1;
-            IEPair iepair = (from ie in _Topology.IEPairs
-                             where ie.Ingress.Key == request.SourceId && ie.Egress.Key == request.DestinationId
-                             select ie).First();
-            _IECount[iepair] += 1;
-
-            foreach (var ie in _Topology.IEPairs)
-            {
-                //_Probability[ie] = _IECount[ie] * 100 / _TotalRequest;
-                _Probability[ie] = _IECount[ie] / _TotalRequest;
-            }
+            RestoreTopology();            
 
             // Caculator when finish findpath
             if (resultPath.Count > 0)// neu tim dc dg 
