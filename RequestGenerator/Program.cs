@@ -181,7 +181,7 @@ namespace RequestGenerator
             */
             int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 }, { 4, 14 } };
             //int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 } };//3IE
-            //int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 }, { 4, 14 }, { 0, 12 }, { 1, 14 } };//6IE
+            //int[,] IE_MIRA = new int[,] { { 0, 12 }, { 4, 8 }, { 3, 1 }, { 4, 14 }, { 7, 11 }, { 1, 14 } };//6IE
             string NAME_MIRA = "MIRA";
 
             int[,] IE_CESNET = new int[,] { { 0, 18 }, { 1, 11 }, { 3, 16 }, { 4, 7 }, { 5, 13 }, { 6, 19 }, { 15, 0 }, { 19, 8 } };
