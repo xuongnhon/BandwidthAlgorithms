@@ -15,11 +15,17 @@
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
-    <RoutingAlgorithm Name="BGHT1" Selected="true" />
+    <RoutingAlgorithm Name="BGHT1" Selected="false" />
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
-    <RoutingAlgorithm Name="TEARD" Selected="false" />
+    <RoutingAlgorithm Name="TEARD" Selected="true">
+      <Params>
+        <Param Name="K1" Value="0.3" />
+        <Param Name="K2" Value="0.4" />
+        <Param Name="K3" Value="0.3" />
+      </Params>
+    </RoutingAlgorithm>
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
