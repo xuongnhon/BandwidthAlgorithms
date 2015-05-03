@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <TopologyFilePath>Map\example_map.dat</TopologyFilePath>
-  <IEListFilePath>Map\example_ie_list.dat</IEListFilePath>
-  <RequestFilePath>Request\EXAMPLE\Test.txt</RequestFilePath>
+  <TopologyFilePath>Map\mira_map.dat</TopologyFilePath>
+  <IEListFilePath>Map\mira_ie_list.dat</IEListFilePath>
+  <RequestFilePath>Request\MIRA\16_static_MIRA_P10-20-30-40_bw5-7-13-17_1000.txt</RequestFilePath>
   <TimerInterval>5</TimerInterval>
   <LogFilePath>D:\log</LogFilePath>
   <LogFileName>MHA.log</LogFileName>
@@ -15,11 +15,11 @@
   <NumberOfSplit>100</NumberOfSplit>
   <UnicastRoutingAlgorithms>
     <RoutingAlgorithm Name="MCSRA" Selected="false" />
-    <RoutingAlgorithm Name="BGHT1" Selected="true" />
+    <RoutingAlgorithm Name="BGHT1" Selected="false" />
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
-    <RoutingAlgorithm Name="TEARD" Selected="false" />
+    <RoutingAlgorithm Name="TEARD" Selected="true" />
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />

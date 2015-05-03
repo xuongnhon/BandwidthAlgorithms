@@ -63,13 +63,9 @@
     <Compile Include="RoutingComponents\MulticastRoutingStrategies\SPT.cs" />
     <Compile Include="RoutingComponents\MulticastRoutingStrategies\SPTR.cs" />
     <Compile Include="RoutingComponents\RoutingStrategies\BGLC.cs" />
-    <Compile Include="RoutingComponents\RoutingStrategies\BLLRA.cs" />
     <Compile Include="RoutingComponents\RoutingStrategies\NewMIRA.cs" />
     <Compile Include="RoutingComponents\RoutingStrategies\TEARD.cs" />
-    <Compile Include="RoutingComponents\RoutingStrategies\BGHT2.cs" />
-    <Compile Include="RoutingComponents\RoutingStrategies\PBMTA.cs" />
     <Compile Include="RoutingComponents\RoutingStrategies\BGHT1.cs" />
-    <Compile Include="RoutingComponents\RoutingStrategies\RBA.cs" />
     <Compile Include="SimulatorComponents\MulticastSimulatorComponents\MulticastRequest.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -90,25 +90,25 @@ namespace NetworkSimulator.SimulatorComponents
                 RoutingStrategy rs = null;
                 switch (ca.Name)
                 {
-                    case "MCSRA":
-                        rs = new BLLRA(_Topology);
-                        break;
+                    //case "MCSRA":
+                    //    rs = new BLLRA(_Topology);
+                    //    break;
 
-                    case "RBA":
-                        rs = new RBA(_Topology);
-                        break;
+                    //case "RBA":
+                    //    rs = new RBA(_Topology);
+                    //    break;
 
                     case "BGHT1":
                         rs = new BGHT1(_Topology, _ResponseManager);
                         break;
 
-                    case "BGHT2":
-                        rs = new BGHT2(_Topology);
-                        break;
+                    //case "BGHT2":
+                    //    rs = new BGHT2(_Topology);
+                    //    break;
 
-                    case "PBMTA":
-                        rs = new PBMTA(_Topology);
-                        break;
+                    //case "PBMTA":
+                    //    rs = new PBMTA(_Topology);
+                    //    break;
 
                     case "BGLC":
                         rs = new BGLC(_Topology);

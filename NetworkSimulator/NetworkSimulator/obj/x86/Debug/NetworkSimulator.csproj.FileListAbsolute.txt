@@ -39,4 +39,3 @@ D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x
 D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\NetworkSimulator.exe
 D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\NetworkSimulator.pdb
 D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\bin\Debug\Troschuetz.Random.dll
-D:\Non_Games\PhD\src\BandwidthAlgorithms\NetworkSimulator\NetworkSimulator\obj\x86\Debug\NetworkSimulator.csprojResolveAssemblyReference.cache

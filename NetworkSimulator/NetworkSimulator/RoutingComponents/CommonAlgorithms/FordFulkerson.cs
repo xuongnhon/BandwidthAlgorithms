@@ -195,8 +195,7 @@ namespace NetworkSimulator.RoutingComponents.CommonAlgorithms
 
             return minCutResult;
         }
-
-        //SAI
+        
         public List<Link> FindMinCutSet(Node source, Node destination) // caoth redo
         //public List<Link> FindMinCutSetOld(Node source, Node destination)
         {

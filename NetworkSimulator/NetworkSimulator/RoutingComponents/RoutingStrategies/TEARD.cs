@@ -83,9 +83,13 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
             Offline();
 
-            K1 = 0.3;
-            K2 = 0.4;
-            K3 = 0.3;
+            //K1 = 0.3;
+            //K2 = 0.4;
+            //K3 = 0.3;
+
+            K1 = 0.1;
+            K2 = 0.8;
+            K3 = 0.1;
            
         }
 
@@ -195,7 +199,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 //Console.WriteLine("_CLink[link]" + _CLink[link]);
 
                 // use k1 k2 k3, công thức cũ
-                _CostLink[link] = (K1 * _CReq[link]) + (K2 * _Load[link]) + (K3 * _CLink[link]) + double.Epsilon;
+                _CostLink[link] = (K1 * _CReq[link]) + (K2 * _Load[link]) + (K3 * _CLink[link]) + double.Epsilon;                
 
 
                 //công thức mới [1] * [3]
