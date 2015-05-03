@@ -115,7 +115,12 @@ namespace NetworkSimulator.SimulatorComponents
                         break;
 
                     case "TEARD":
-                        rs = new TEARD(_Topology);
+                        //Read k in XML
+                        //rs = new TEARD(_Topology);
+                        rs = new TEARD(_Topology
+                            , ca.GetParam<double>("K1")
+                            , ca.GetParam<double>("K2")
+                            , ca.GetParam<double>("K3"));
                         break;
 
                     case "MHA":

@@ -19,7 +19,13 @@
     <RoutingAlgorithm Name="BGHT2" Selected="false" />
     <RoutingAlgorithm Name="PBMTA" Selected="false" />
     <RoutingAlgorithm Name="BGLC" Selected="false" />
-    <RoutingAlgorithm Name="TEARD" Selected="false" />
+    <RoutingAlgorithm Name="TEARD" Selected="true">
+      <Params>
+        <Param Name="K1" Value="0.3" />
+        <Param Name="K2" Value="0.4" />
+        <Param Name="K3" Value="0.3" />
+      </Params>
+    </RoutingAlgorithm>
     <RoutingAlgorithm Name="MHA" Selected="false" />
     <RoutingAlgorithm Name="RBA" Selected="false" />
     <RoutingAlgorithm Name="WSP" Selected="false" />
@@ -29,14 +35,14 @@
         <Param Name="Alpha" Value="1" />
       </Params>
     </RoutingAlgorithm>
-    <RoutingAlgorithm Name="NewMIRA" Selected="true">
+    <RoutingAlgorithm Name="NewMIRA" Selected="false">
       <Params>
         <Param Name="Alpha" Value="1" />
       </Params>
     </RoutingAlgorithm>
     <RoutingAlgorithm Name="DORA" Selected="false">
       <Params>
-        <Param Name="BWP" Value="0.5" />
+        <Param Name="BWP" Value="0.9" />
       </Params>
     </RoutingAlgorithm>
     <RoutingAlgorithm Name="RRATE" Selected="false">

@@ -53,6 +53,15 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             Initialize();
         }
 
+        public TEARD(Topology topology, double _K1, double _K2, double _K3)
+            : base(topology)
+        {
+            Initialize();
+            K1 = _K1;
+            K2 = _K2;
+            K3 = _K3;
+        }
+
         private void Initialize()
         {
             _Dijkstra = new Dijkstra(_Topology);
@@ -83,18 +92,13 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
             Offline();
 
-            //K1 = 0.3;
-            //K2 = 0.4;
-            //K3 = 0.3;
-
-            K1 = 0.1;
-            K2 = 0.8;
-            K3 = 0.1;
-           
+            K1 = 0.3;
+            K2 = 0.4;
+            K3 = 0.3;
         }
 
         public void Offline()
-        {            
+        {
             foreach (var link in _Topology.Links)
             {
                 //_CostLink[link] = double.Epsilon;
@@ -120,19 +124,19 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 _IECount[ie] = 0;
 
                 // haiz: bad for reroute
-                _CIeLink[ie] = new Dictionary<Link, double>();                
+                _CIeLink[ie] = new Dictionary<Link, double>();
                 foreach (var link in _Topology.Links)
                 {
                     _CIeLink[ie][link] = 0;
                 }
 
-                List<List<Link>> paths = _ASP.GetPaths(ie.Ingress, ie.Egress);                
+                List<List<Link>> paths = _ASP.GetPaths(ie.Ingress, ie.Egress);
                 foreach (var path in paths)
                 {
                     foreach (var link in path)
                     {
                         _CIeLink[ie][link] += 1;
-                    }                                         
+                    }
                 }
 
                 // chia _CIeLink cho tong so paths cua cap ie, de dam bao ti le nhu 2 so con lai
@@ -140,17 +144,17 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 {
                     //_CIeLink[ie][link] = _CIeLink[ie][link] *100 / paths.Count;
                     _CIeLink[ie][link] = _CIeLink[ie][link] / paths.Count;
-               
-                }                
+
+                }
             }
-           
+
             //_Stopwatch.Stop();
             //Console.WriteLine("Count  _CIeLink[ie][link]: " + _Stopwatch.ElapsedMilliseconds);
             // ~ 25ms for MIRA topo 
             // :( too long comparing to ?
         }
 
-        #region 
+        #region
 
         public override List<Link> GetPath(SimulatorComponents.Request request)
         {
@@ -260,7 +264,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             // Use dijsktra to get path
             EliminateAllLinksNotSatisfy(request.Demand);
             var resultPath = _Dijkstra.GetShortestPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId], _CostLink);
-            RestoreTopology();            
+            RestoreTopology();
 
             // Caculator when finish findpath
             if (resultPath.Count > 0)// neu tim dc dg 
@@ -277,6 +281,6 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
         #endregion
 
-      
+
     }
 }

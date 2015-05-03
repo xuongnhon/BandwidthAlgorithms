@@ -13,7 +13,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         private Dictionary<IEPair, List<List<Link>>> _P;
         private Dictionary<Link, double> _Cl;
 
-        double totalNumberOfPaths ;
+        double _totalNumberOfPaths ;
 
         public BGLC(Topology topology)
             : base(topology)
@@ -37,7 +37,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
             // caoth
             // caoth No. of demand per link / length of all possible connection
             // formular (1) of 2012_BGMRA
-            totalNumberOfPaths = 0;
+            _totalNumberOfPaths = 0;
 
             foreach (var ie in _Topology.IEPairs)
             {
@@ -54,7 +54,7 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                 //    totalNumberOfPaths += path.Count;
                 //}
 
-                totalNumberOfPaths += _P[ie].Count; // total path
+                _totalNumberOfPaths += _P[ie].Count; // total path
             }
 
             
@@ -70,8 +70,12 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
         {
             Dictionary<Link, double> w = new Dictionary<Link, double>();
             // compute link weight
+            double criticality;
             foreach (var link in _Topology.Links)
-                w[link] = _Cl[link] / link.ResidualBandwidth;
+            {
+                criticality = _Cl[link] / _totalNumberOfPaths;
+                w[link] =  criticality/ link.ResidualBandwidth;
+            }
 
             // eliminate all link not satisfy bandwidth demand
             EliminateAllLinksNotSatisfy(request.Demand);
