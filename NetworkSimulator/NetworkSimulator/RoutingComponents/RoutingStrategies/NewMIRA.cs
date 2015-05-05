@@ -45,6 +45,9 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
 
             EliminateAllLinksNotSatisfy(request.Demand);
 
+            //int debug=0;
+            //if(request.Id > 250)
+            //    debug = -1;
 
             var resultPath = _Dijkstra.GetShortestPath(_Topology.Nodes[request.SourceId], _Topology.Nodes[request.DestinationId], _Cost);
 
@@ -74,10 +77,12 @@ namespace NetworkSimulator.RoutingComponents.RoutingStrategies
                     double maxflow = 0;//_FordFulkerson.ComputeMaxFlow(item.Ingress, item.Egress);
                     Dictionary<Link, double> subflows = _FordFulkerson.SubFlowOfAllLinks(item.Ingress, item.Egress, ref maxflow);
 
+                    maxflow = maxflow == 0 ? double.Epsilon : maxflow;
 
                     foreach (var link in _Topology.Links)
                     {
-                        _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);
+                        //if (maxflow > 0 && link.ResidualBandwidth>0)
+                            _Cost[link] += subflows[link] / (maxflow * link.ResidualBandwidth);
                     }
                 }                
             }
